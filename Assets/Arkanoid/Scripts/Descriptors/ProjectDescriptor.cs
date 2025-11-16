@@ -1,7 +1,7 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Project Descriptor", menuName = "Project Descriptors/Project Descriptor")]
+[CreateAssetMenu(fileName = "Project Descriptor", menuName = "Game Descriptors/Project Descriptor")]
 public class ProjectDescriptor : ScriptableObject
 {
-    [field: SerializeField] public string StartScene { get; private set; } = "GameplayScene";
+    [field: SerializeField] public string StartScene { get; private set; } = string.Empty;
 }
