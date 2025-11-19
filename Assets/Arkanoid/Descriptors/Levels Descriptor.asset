@@ -15,3 +15,31 @@ MonoBehaviour:
   levels:
   - <LevelName>k__BackingField: Level 0
     <NextLevelName>k__BackingField: Level 0
+    <Bricks>k__BackingField:
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -5, y: 8.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -3, y: 8.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.2554821, b: 0, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -1, y: 8.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.53394943, b: 0, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 1, y: 8.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.53333336, b: 0, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 3, y: 8.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.25490198, b: 0, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 5, y: 8.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+  <PlatformPosition>k__BackingField: {x: 0, y: -10.5, z: 0}
+  <BallPosition>k__BackingField: {x: 0, y: -9, z: 0}
+  <BorderPrefabKey>k__BackingField: Border.prefab

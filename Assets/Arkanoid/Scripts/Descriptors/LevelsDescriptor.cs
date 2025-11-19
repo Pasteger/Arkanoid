@@ -5,6 +5,9 @@ using UnityEngine;
 public class LevelsDescriptor : ScriptableObject
 {
     [field: SerializeField] private LevelData[] levels = null!;
+    [field: SerializeField] public Vector3 PlatformPosition { get; private set; }
+    [field: SerializeField] public Vector3 BallPosition { get; private set; }
+    [field: SerializeField] public string BorderPrefabKey { get; private set; }
 
     public LevelData GetLevel(string levelName) =>
         levelName != string.Empty

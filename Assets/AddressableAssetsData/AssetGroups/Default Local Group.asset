@@ -21,6 +21,22 @@ MonoBehaviour:
     m_Address: Level 0
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 5fb1a1c9c4e78fc4f85c3ddc879f366f
+    m_Address: Ball.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 9b8eb3977e316df4a844588b024c4e67
+    m_Address: Platform.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 713d03890a44a014695e1f0efe576909
+    m_Address: Brick.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: 79c32a7c13c7400478cff64047c454c8
+    m_Address: Border.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e28955d5e82b1a8418b377ff88381e66, type: 2}
   m_SchemaSet:

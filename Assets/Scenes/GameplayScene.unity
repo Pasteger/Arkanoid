@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelsDescriptor: {fileID: 11400000, guid: 2754db19ce49c7348b3d9113693bac6b, type: 2}
+  interactablesPrefabKeysDescriptor: {fileID: 11400000, guid: 35268968c9553f24daaa48be58385349, type: 2}
 --- !u!4 &7907271
 Transform:
   m_ObjectHideFlags: 0
