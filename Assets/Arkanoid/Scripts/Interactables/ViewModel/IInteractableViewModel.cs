@@ -1,11 +1,14 @@
 ﻿using System;
+using UniRx;
 using UnityEngine;
 
 public interface IInteractableViewModel : IDisposable
 {
-    public InteractableType Type { get; set; }
-    public Vector3 Position { get; set; }
+    public InteractableType Type { get; }
+    public Vector3 Position { get; }
+    public Subject<IInteractableModel> OnSetModel { get; }
 
     public void SetModel(IInteractableModel model);
-    public void Update(Rigidbody2D rigidbody, BoxCollider2D boxCollider, Transform transform);
+    public void Update(Rigidbody rigidbody);
+    public void Collide(Collision other);
 }

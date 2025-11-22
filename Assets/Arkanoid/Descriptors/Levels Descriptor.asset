@@ -19,27 +19,173 @@ MonoBehaviour:
     - <Type>k__BackingField: 1
       <Position>k__BackingField: {x: -5, y: 8.5, z: 0}
       <IsUnbreakable>k__BackingField: 0
-      <Color>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+      <Color>k__BackingField: {r: 1, g: 0.4, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
     - <Type>k__BackingField: 1
       <Position>k__BackingField: {x: -3, y: 8.5, z: 0}
       <IsUnbreakable>k__BackingField: 0
-      <Color>k__BackingField: {r: 1, g: 0.2554821, b: 0, a: 1}
+      <Color>k__BackingField: {r: 1, g: 0.5, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
     - <Type>k__BackingField: 1
       <Position>k__BackingField: {x: -1, y: 8.5, z: 0}
       <IsUnbreakable>k__BackingField: 0
-      <Color>k__BackingField: {r: 1, g: 0.53394943, b: 0, a: 1}
+      <Color>k__BackingField: {r: 1, g: 0.6, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
     - <Type>k__BackingField: 1
       <Position>k__BackingField: {x: 1, y: 8.5, z: 0}
       <IsUnbreakable>k__BackingField: 0
-      <Color>k__BackingField: {r: 1, g: 0.53333336, b: 0, a: 1}
+      <Color>k__BackingField: {r: 1, g: 0.6, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
     - <Type>k__BackingField: 1
       <Position>k__BackingField: {x: 3, y: 8.5, z: 0}
       <IsUnbreakable>k__BackingField: 0
-      <Color>k__BackingField: {r: 1, g: 0.25490198, b: 0, a: 1}
+      <Color>k__BackingField: {r: 1, g: 0.5, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
     - <Type>k__BackingField: 1
       <Position>k__BackingField: {x: 5, y: 8.5, z: 0}
       <IsUnbreakable>k__BackingField: 0
-      <Color>k__BackingField: {r: 1, g: 0, b: 0, a: 1}
+      <Color>k__BackingField: {r: 1, g: 0.4, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -5, y: 7.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.8, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -3, y: 7.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.8, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -1, y: 7.5, z: 0}
+      <IsUnbreakable>k__BackingField: 1
+      <Color>k__BackingField: {r: 1, g: 0.8, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 1, y: 7.5, z: 0}
+      <IsUnbreakable>k__BackingField: 1
+      <Color>k__BackingField: {r: 1, g: 0.8, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 3, y: 7.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.8, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 5, y: 7.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.8, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -5, y: 6.5, z: 0}
+      <IsUnbreakable>k__BackingField: 1
+      <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -3, y: 6.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 1, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -1, y: 6.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 1, b: 0.2, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 1, y: 6.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 1, b: 0.2, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 3, y: 6.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 1, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 5, y: 6.5, z: 0}
+      <IsUnbreakable>k__BackingField: 1
+      <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -3, y: 5.5, z: 0}
+      <IsUnbreakable>k__BackingField: 1
+      <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -1, y: 5.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 0, g: 1, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 1, y: 5.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 0, g: 1, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 3, y: 5.5, z: 0}
+      <IsUnbreakable>k__BackingField: 1
+      <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -5, y: 4.5, z: 0}
+      <IsUnbreakable>k__BackingField: 1
+      <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -3, y: 4.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 0, g: 1, b: 1, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -1, y: 4.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 0, g: 0.8, b: 1, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 1, y: 4.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 0, g: 0.8, b: 1, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 3, y: 4.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 0, g: 1, b: 1, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 5, y: 4.5, z: 0}
+      <IsUnbreakable>k__BackingField: 1
+      <Color>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -5, y: 3.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 0.6, g: 0, b: 1, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -3, y: 3.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 0.7, g: 0, b: 1, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -1, y: 3.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 0.8, g: 0, b: 1, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 1, y: 3.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 0.8, g: 0, b: 1, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 3, y: 3.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 0.7, g: 0, b: 1, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 5, y: 3.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 0.6, g: 0, b: 1, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
   <PlatformPosition>k__BackingField: {x: 0, y: -10.5, z: 0}
   <BallPosition>k__BackingField: {x: 0, y: -9, z: 0}
   <BorderPrefabKey>k__BackingField: Border.prefab

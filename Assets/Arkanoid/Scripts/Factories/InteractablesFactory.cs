@@ -1,20 +1,34 @@
 ﻿using Cysharp.Threading.Tasks;
-using UnityEngine;
-using UnityEngine.AddressableAssets;
 using Zenject;
 
 public class InteractablesFactory
 {
-    private readonly InteractablesPrefabKeysDescriptor    interactablesPrefabKeysDescriptor;
-    private readonly PrefabKeyFactory                     prefabKeyFactory;
+    private readonly PrefabKeyFactory prefabKeyFactory;
+    private readonly InteractablesDescriptor interactableDescriptor;
 
     [Inject]
-    public InteractablesFactory(InteractablesPrefabKeysDescriptor prefabKeysDescriptor, PrefabKeyFactory prefabFactory)
+    public InteractablesFactory(InteractablesDescriptor descriptor,
+        PrefabKeyFactory prefabFactory)
     {
-        interactablesPrefabKeysDescriptor = prefabKeysDescriptor;
         prefabKeyFactory = prefabFactory;
+        interactableDescriptor = descriptor;
     }
 
-    public UniTask<IInteractableView> Create(InteractableType interactableType) => 
-        prefabKeyFactory.Create<IInteractableView>(interactablesPrefabKeysDescriptor.GetKey(interactableType));
+    public async UniTask<IInteractableView> Create(InteractableType interactableType)
+    {
+        IInteractableView view = await CreateView(interactableType);
+
+        BaseInteractableDescriptor descriptor = interactableDescriptor.GetDescriptor(interactableType);
+
+        IInteractableViewModel viewModel = descriptor.ViewModel;
+        IInteractableModel model = descriptor.Model;
+
+        view.SetViewModel(viewModel);
+        viewModel.SetModel(model);
+
+        return view;
+    }
+
+    private UniTask<IInteractableView> CreateView(InteractableType interactableType) =>
+        prefabKeyFactory.Create<IInteractableView>(interactableDescriptor.GetDescriptor(interactableType).PrefabKey);
 }

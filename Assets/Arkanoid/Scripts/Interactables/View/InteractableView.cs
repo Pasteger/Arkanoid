@@ -1,16 +1,20 @@
 using UniRx;
 using UnityEngine;
 
-public class InteractableView : MonoBehaviour, IInteractableView
+public abstract class InteractableView : MonoBehaviour, IInteractableView
 {
     public IInteractableViewModel ViewModel { get; private set; } = null!;
 
-    protected readonly CompositeDisposable Disposable = new CompositeDisposable();
+    protected readonly CompositeDisposable Disposables = new CompositeDisposable();
+
+    protected Rigidbody InteractableRigidbody = null!;
 
     public void SetViewModel(IInteractableViewModel viewModel)
     {
         ViewModel = viewModel;
-        Disposable.Add(ViewModel);
+        Disposables.Add(ViewModel);
+
+        Subscribe();
     }
 
     public void Activate(bool isActive, Vector3 position = new Vector3())
@@ -19,7 +23,16 @@ public class InteractableView : MonoBehaviour, IInteractableView
         transform.position = position;
     }
 
+    protected abstract void Init(IInteractableModel model);
+    protected virtual void Subscribe() => ViewModel.OnSetModel.Subscribe(Init).AddTo(Disposables);
+
+    protected virtual void Awake() => InteractableRigidbody = GetComponent<Rigidbody>();
+
+    protected virtual void FixedUpdate() => ViewModel.Update(InteractableRigidbody);
+
+    protected virtual void OnCollisionEnter(Collision other) => ViewModel.Collide(other);
+
     protected void OnDestroy() => Dispose();
 
-    public void Dispose() => Disposable.Dispose();
+    public void Dispose() => Disposables.Dispose();
 }

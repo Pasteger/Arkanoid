@@ -39,7 +39,8 @@ public class LevelLoader : IInitializable
 
         foreach (BrickModel brickModel in currentLevelData.Bricks)
         {
-            await interactablesPool.Get(InteractableType.Brick, brickModel.Position);
+            IInteractableView brick = await interactablesPool.Get(InteractableType.Brick, brickModel.Position);
+            brick.ViewModel.SetModel(brickModel);
         }
     }
 

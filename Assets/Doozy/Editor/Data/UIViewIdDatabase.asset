@@ -13,4 +13,32 @@ MonoBehaviour:
   m_Name: UIViewIdDatabase
   m_EditorClassIdentifier: 
   Database:
-    Items: []
+    Items:
+    - Category: HUD
+      Name: Bottom
+    - Category: HUD
+      Name: Left
+    - Category: HUD
+      Name: Portrait
+    - Category: HUD
+      Name: Right
+    - Category: HUD
+      Name: Score
+    - Category: HUD
+      Name: Stars
+    - Category: HUD
+      Name: Top
+    - Category: Menu
+      Name: Login
+    - Category: Menu
+      Name: Mail
+    - Category: Menu
+      Name: Main
+    - Category: Menu
+      Name: Quit
+    - Category: Menu
+      Name: Register
+    - Category: Menu
+      Name: Settings
+    - Category: None
+      Name: None

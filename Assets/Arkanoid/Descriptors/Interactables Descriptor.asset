@@ -9,14 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f2705f4273c435f9b7ebc70a44e7a11, type: 3}
-  m_Name: Interactables Prefab Keys Descriptor
+  m_Script: {fileID: 11500000, guid: ef78752a1368457d943ecd14d4689b81, type: 3}
+  m_Name: Interactables Descriptor
   m_EditorClassIdentifier: 
-  prefabKeysForType:
+  descriptors:
     <SerializableKeyValuePairList>k__BackingField:
     - Key: 0
-      Value: Ball.prefab
+      Value: {fileID: 11400000, guid: 0aa30db635b820c4d99394e1eb06b008, type: 2}
     - Key: 1
-      Value: Brick.prefab
+      Value: {fileID: 11400000, guid: f139d08b3580bda43aab8ac04c734282, type: 2}
     - Key: 2
-      Value: Platform.prefab
+      Value: {fileID: 11400000, guid: 0eba6f2a64b4bde4fbde62d2df88d4d2, type: 2}

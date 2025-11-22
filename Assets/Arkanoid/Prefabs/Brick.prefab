@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cdaa4c94d31f4761b670814cf6d64e13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  brickDestructionEffect: {fileID: -3258915565656588955, guid: 71954c29cdb025149854669c1f80e620, type: 3}
 --- !u!33 &278511956209976923
 MeshFilter:
   m_ObjectHideFlags: 0
