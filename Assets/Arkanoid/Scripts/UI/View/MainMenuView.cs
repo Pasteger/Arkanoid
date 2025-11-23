@@ -20,4 +20,11 @@ public class MainMenuView : BaseUIView
         playButton.onClick.AddListener(() => viewModel.PlayGame());
         exitButton.onClick.AddListener(() => viewModel.ExitGame());
     }
+
+    public override void Dispose()
+    {
+        base.Dispose();
+        playButton.onClick.RemoveAllListeners();
+        exitButton.onClick.RemoveAllListeners();
+    }
 }

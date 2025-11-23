@@ -1,18 +1,25 @@
-﻿using UniRx;
+﻿using Cysharp.Threading.Tasks;
+using Zenject;
 
 public class MainMenuViewModel : BaseUIViewModel
 {
-    public Subject<Unit> OnPlay;
-    public Subject<Unit> OnExit;
+    private LevelLoader levelLoader;
+    private GameExit gameExit;
 
-    public MainMenuViewModel() : base()
+    [Inject]
+    public void Construct(LevelLoader loader, GameExit exit)
     {
-        OnPlay = new Subject<Unit>();
-        OnExit = new Subject<Unit>();
+        levelLoader = loader;
+        gameExit = exit;
     }
 
-    public void PlayGame() => OnPlay.OnNext(Unit.Default);
-    public void ExitGame() => OnExit.OnNext(Unit.Default);
+    public void PlayGame()
+    {
+        levelLoader.LoadLevel().Forget();
+        OnActivate.OnNext(false);
+    }
+
+    public void ExitGame() => gameExit.Exit();
 
     protected override void Subscribe()
     {

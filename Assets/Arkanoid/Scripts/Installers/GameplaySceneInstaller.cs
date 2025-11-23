@@ -13,11 +13,16 @@ public class GameplaySceneInstaller : MonoInstaller
         Container.Bind<InteractablesDescriptor>().FromInstance(interactablesDescriptor).AsSingle();
         Container.Bind<UIModelsDescriptor>().FromInstance(uiModelsDescriptor).AsSingle();
 
-        Container.BindInterfacesAndSelfTo<InteractablesFactory>().AsSingle();
-        Container.BindInterfacesAndSelfTo<PrefabKeyFactory>().AsSingle();
+        Container.Bind<InteractablesFactory>().AsSingle();
+        Container.Bind<UIFactory>().AsSingle();
+        Container.Bind<PrefabKeyFactory>().AsSingle();
 
-        Container.BindInterfacesAndSelfTo<InteractablesPool>().AsSingle();
+        Container.Bind<InteractablesPool>().AsSingle();
 
-        Container.BindInterfacesAndSelfTo<LevelLoader>().AsSingle().NonLazy();
+        Container.Bind<InteractablesLoader>().AsSingle();
+        Container.BindInterfacesAndSelfTo<LevelLoader>().AsSingle();
+        Container.BindInterfacesAndSelfTo<GameExit>().AsSingle();
+
+        Container.BindInterfacesAndSelfTo<UILoader>().AsSingle().NonLazy();
     }
 }

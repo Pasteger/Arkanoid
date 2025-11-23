@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 95ee86a5ec794db084491ec327e750e5, type: 3}
-  m_Name: Main Menu Descriptor
+  m_Script: {fileID: 11500000, guid: 8f0fa5a14c624f289096c3d8a34cfc9c, type: 3}
+  m_Name: HUD Descriptor
   m_EditorClassIdentifier: 
-  <PrefabKey>k__BackingField: MainMenuView.prefab
-  <MainMenuModel>k__BackingField:
-    <PlayButtonText>k__BackingField: Play
-    <ExitButtonText>k__BackingField: Exit
+  <PrefabKey>k__BackingField: HUDView.prefab
+  <HUDModel>k__BackingField:
+    <Score>k__BackingField:
+      value: 0
+    <ScoreLabelText>k__BackingField: 'Score:'

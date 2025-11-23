@@ -2,53 +2,46 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
-public class LevelLoader : IInitializable
+public class LevelLoader
 {
-    private LevelsDescriptor levelsDescriptor = null!;
-    private InteractablesPool interactablesPool = null!;
-    private PrefabKeyFactory prefabKeyFactory = null!;
+    private readonly LevelsDescriptor levelsDescriptor;
+    private readonly PrefabKeyFactory prefabKeyFactory;
+    private readonly InteractablesLoader interactablesLoader;
 
     private LevelData currentLevelData = null!;
     private Transform border = null!;
 
     [Inject]
-    public void Construct(LevelsDescriptor descriptor, InteractablesPool pool, PrefabKeyFactory keyFactory)
+    public LevelLoader(
+        LevelsDescriptor descriptor,
+        PrefabKeyFactory keyFactory,
+        InteractablesLoader loaderInteractables)
     {
         levelsDescriptor = descriptor;
-        interactablesPool = pool;
         prefabKeyFactory = keyFactory;
+        interactablesLoader = loaderInteractables;
     }
-
-    public void Initialize() => LoadLevel().Forget();
 
     public async UniTask LoadLevel()
     {
         string levelName = PlayerPrefs.GetString("CurrentLevel", string.Empty);
-
         currentLevelData = levelsDescriptor.GetLevel(levelName);
 
         if (border == null)
         {
             border = await prefabKeyFactory.Create<Transform>(levelsDescriptor.BorderPrefabKey);
         }
-        
+
         border.gameObject.SetActive(true);
 
-        await interactablesPool.Get(InteractableType.Platform, levelsDescriptor.PlatformPosition);
-        await interactablesPool.Get(InteractableType.Ball, levelsDescriptor.BallPosition);
-
-        foreach (BrickModel brickModel in currentLevelData.Bricks)
-        {
-            IInteractableView brick = await interactablesPool.Get(InteractableType.Brick, brickModel.Position);
-            brick.ViewModel.SetModel(brickModel);
-        }
+        await interactablesLoader.Load(currentLevelData);
     }
 
-    public void UnloadLevel()
+    private void UnloadLevel()
     {
         border.gameObject.SetActive(false);
 
-        interactablesPool.ReleaseAll();
+        interactablesLoader.Unload();
     }
 
     public void CompleteLevel()

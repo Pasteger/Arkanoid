@@ -37,6 +37,14 @@ MonoBehaviour:
     m_Address: Border.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: 25972bc2868dcfa42b40cd776bd8a82b
+    m_Address: MainMenuView.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+  - m_GUID: a14151c4ddf302f4eafb00acce395f26
+    m_Address: HUDView.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e28955d5e82b1a8418b377ff88381e66, type: 2}
   m_SchemaSet:
