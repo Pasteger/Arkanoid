@@ -18,6 +18,10 @@ public class GameplaySceneInstaller : MonoInstaller
         Container.Bind<PrefabKeyFactory>().AsSingle();
 
         Container.Bind<InteractablesPool>().AsSingle();
+        
+        Container.Bind<BrickDestruction>().AsSingle();
+        Container.Bind<BallMovement>().AsSingle();
+        Container.BindInterfacesAndSelfTo<PlatformMovement>().AsSingle();
 
         Container.Bind<InteractablesLoader>().AsSingle();
         Container.BindInterfacesAndSelfTo<LevelLoader>().AsSingle();

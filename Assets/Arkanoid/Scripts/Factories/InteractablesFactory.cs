@@ -5,13 +5,17 @@ public class InteractablesFactory
 {
     private readonly PrefabKeyFactory prefabKeyFactory;
     private readonly InteractablesDescriptor interactableDescriptor;
+    private readonly DiContainer diContainer;
 
     [Inject]
-    public InteractablesFactory(InteractablesDescriptor descriptor,
-        PrefabKeyFactory prefabFactory)
+    public InteractablesFactory(
+        InteractablesDescriptor descriptor,
+        PrefabKeyFactory prefabFactory,
+        DiContainer container)
     {
         prefabKeyFactory = prefabFactory;
         interactableDescriptor = descriptor;
+        diContainer = container;
     }
 
     public async UniTask<IInteractableView> Create(InteractableType interactableType)
@@ -23,8 +27,9 @@ public class InteractablesFactory
         IInteractableViewModel viewModel = descriptor.ViewModel;
         IInteractableModel model = descriptor.Model;
 
-        view.SetViewModel(viewModel);
+        diContainer.Inject(viewModel);
         viewModel.SetModel(model);
+        view.SetViewModel(viewModel);
 
         return view;
     }

@@ -13,8 +13,9 @@ MonoBehaviour:
   m_Name: Brick Descriptor
   m_EditorClassIdentifier: 
   <PrefabKey>k__BackingField: Brick.prefab
-  <Model>k__BackingField:
+  <BrickModel>k__BackingField:
     <Type>k__BackingField: 1
     <Position>k__BackingField: {x: 0, y: 0, z: 0}
     <IsUnbreakable>k__BackingField: 0
     <Color>k__BackingField: {r: 0, g: 0, b: 0, a: 0}
+    <UnbreakableColor>k__BackingField: {r: 0.5, g: 0.5, b: 0.5, a: 1}

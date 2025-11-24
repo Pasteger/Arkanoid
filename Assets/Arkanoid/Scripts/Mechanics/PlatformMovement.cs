@@ -1,21 +1,19 @@
 using System;
-using UnityEngine;
+using UnityEngine;using Zenject;
 
-public class PlatformMovement : IDisposable
+public class PlatformMovement : IInitializable, IDisposable
 {
     private bool isBlockingRight;
     private bool isBlockingLeft;
-    private float moveSpeed;
-    private readonly PlatformControls platformControls;
+    private PlatformControls platformControls;
 
-    public PlatformMovement(float moveSpeed)
+    public void Initialize()
     {
-        this.moveSpeed = moveSpeed;
         platformControls = new PlatformControls();
         platformControls.Enable();
     }
-
-    public void Move(Rigidbody rigidbody)
+    
+    public void Move(Rigidbody rigidbody, float moveSpeed)
     {
         float axis = platformControls.Actions.Movement.ReadValue<float>();
 

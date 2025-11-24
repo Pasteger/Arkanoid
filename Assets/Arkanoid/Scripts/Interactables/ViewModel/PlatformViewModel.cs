@@ -1,19 +1,14 @@
 ﻿using UnityEngine;
+using Zenject;
 
 public class PlatformViewModel : InteractableViewModel
 {
-    private readonly PlatformMovement platformMovement;
+    private PlatformMovement platformMovement;
+    private PlatformModel platformModel => (PlatformModel)Model;
 
-    public PlatformViewModel(PlatformMovement platformMovement)
-    {
-        this.platformMovement = platformMovement;
-        Disposables.Add(platformMovement);
-    }
-
-    public PlatformViewModel(PlatformViewModel referenceViewModel) : base(referenceViewModel)
-    {
-    }
+    [Inject]
+    public void Construct(PlatformMovement movement) => platformMovement = movement;
     
-    public override void Update(Rigidbody rigidbody) => platformMovement.Move(rigidbody);
+    public override void Update(Rigidbody rigidbody) => platformMovement.Move(rigidbody, platformModel.MoveSpeed.Value);
     public override void Collide(Collision other) => platformMovement.Collide(other);
 }

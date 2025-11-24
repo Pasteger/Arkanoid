@@ -1,18 +1,19 @@
 ﻿using UniRx;
 using UnityEngine;
+using Zenject;
 
 public class BrickViewModel : InteractableViewModel
 {
     public readonly Subject<Unit> OnDestroy = new Subject<Unit>();
 
-    private readonly BrickDestruction brickDestruction;
+    private BrickDestruction brickDestruction;
 
     private BrickModel brickModel = null;
 
-    public BrickViewModel(BrickDestruction brickDestruction)
+    [Inject]
+    public void Construct(BrickDestruction destruction)
     {
-        this.brickDestruction = brickDestruction;
-        this.brickDestruction.OnDestroy.Subscribe(OnDestroy.OnNext).AddTo(Disposables);
+        brickDestruction = destruction;
     }
 
     public override void SetModel(IInteractableModel model)
@@ -21,5 +22,11 @@ public class BrickViewModel : InteractableViewModel
         brickModel = (BrickModel)model;
     }
 
-    public override void Collide(Collision other) => brickDestruction.Collide(other, brickModel.IsUnbreakable);
+    public override void Collide(Collision other)
+    {
+        if (brickDestruction.Collide(other, brickModel.IsUnbreakable))
+        {
+            OnDestroy.OnNext(Unit.Default);
+        }
+    }
 }

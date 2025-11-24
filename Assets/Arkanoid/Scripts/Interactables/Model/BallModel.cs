@@ -15,6 +15,9 @@ public class BallModel : InteractableModel
     {
     }
 
-    public BallModel(BallModel referenceModel) : base(referenceModel) =>
+    public BallModel(BallModel referenceModel) : base(referenceModel)
+    {
         MoveSpeed.Value = referenceModel.MoveSpeed.Value;
+        Direction.Value = referenceModel.Direction.Value;
+    }
 }
