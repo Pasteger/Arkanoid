@@ -2,5 +2,5 @@
 {
     MainMenu = 0,
     HUD = 1,
-    //EndGameWindow = 2,
+    EndGameWindow = 2,
 }

@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-public class BrickViewModel : InteractableViewModel
+public class BrickViewModel : BaseInteractableViewModel
 {
     public readonly Subject<Unit> OnDestroy = new Subject<Unit>();
 

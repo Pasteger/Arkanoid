@@ -1,22 +1,23 @@
 using UniRx;
 using UnityEngine;
 
-public class InteractableViewModel : IInteractableViewModel
+public abstract class BaseInteractableViewModel : IInteractableViewModel
 {
     public InteractableType Type { get; set; }
     public Vector3 Position { get; set; }
     public Subject<IInteractableModel> OnSetModel { get; } = new Subject<IInteractableModel>();
+    public Subject<bool> OnActivate { get; } = new Subject<bool>();
 
     protected IInteractableModel Model { get; private set; }
 
 
     protected readonly CompositeDisposable Disposables = new CompositeDisposable();
 
-    protected InteractableViewModel()
+    protected BaseInteractableViewModel()
     {
     }
 
-    protected InteractableViewModel(InteractableViewModel referenceViewModel)
+    protected BaseInteractableViewModel(BaseInteractableViewModel referenceViewModel)
     {
         Type = referenceViewModel.Type;
         Position = referenceViewModel.Position;

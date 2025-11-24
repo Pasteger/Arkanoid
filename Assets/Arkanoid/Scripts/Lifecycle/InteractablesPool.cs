@@ -59,9 +59,11 @@ public class InteractablesPool : IDisposable
 
     public void ReleaseAll()
     {
-        foreach (IInteractableView interactable in activePools.Values.SelectMany(set => set))
+        List<IInteractableView> interactables = activePools.Values.SelectMany(set => set).ToList();
+
+        for (int index = 0; index < interactables.Count; index++)
         {
-            Release(interactable);
+            Release(interactables[index]);
         }
     }
 

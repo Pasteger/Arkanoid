@@ -1,7 +1,7 @@
 ﻿using UniRx;
 using UnityEngine;
 
-public class BrickView : InteractableView
+public class BrickView : BaseInteractableView
 {
     [SerializeField] private BrickDestructionEffect brickDestructionEffect = null!;
 

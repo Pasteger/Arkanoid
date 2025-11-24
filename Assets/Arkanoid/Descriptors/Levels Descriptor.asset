@@ -14,6 +14,79 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levels:
   - <LevelName>k__BackingField: Level 0
+    <NextLevelName>k__BackingField: Level 1
+    <Bricks>k__BackingField:
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -5, y: 8.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.4, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -3, y: 8.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.5, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -1, y: 8.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.6, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 1, y: 8.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.6, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 3, y: 8.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.5, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 5, y: 8.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.4, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -5, y: 7.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.8, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -3, y: 7.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.8, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 3, y: 7.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.8, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 5, y: 7.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 0.8, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -3, y: 6.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 1, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: -1, y: 7.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 1, b: 0.2, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 1, y: 7.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 1, b: 0.2, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+    - <Type>k__BackingField: 1
+      <Position>k__BackingField: {x: 3, y: 6.5, z: 0}
+      <IsUnbreakable>k__BackingField: 0
+      <Color>k__BackingField: {r: 1, g: 1, b: 0, a: 1}
+      <UnbreakableColor>k__BackingField: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
+  - <LevelName>k__BackingField: Level 1
     <NextLevelName>k__BackingField: Level 0
     <Bricks>k__BackingField:
     - <Type>k__BackingField: 1

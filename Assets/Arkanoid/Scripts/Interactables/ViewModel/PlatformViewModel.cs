@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 
-public class PlatformViewModel : InteractableViewModel
+public class PlatformViewModel : BaseInteractableViewModel
 {
     private PlatformMovement platformMovement;
     private PlatformModel platformModel => (PlatformModel)Model;

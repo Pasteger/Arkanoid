@@ -1,4 +1,4 @@
-﻿public class PlatformView : InteractableView
+﻿public class PlatformView : BaseInteractableView
 {
     protected override void Init(IInteractableModel model)
     {

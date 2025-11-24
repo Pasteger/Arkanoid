@@ -1,9 +1,12 @@
 using Cysharp.Threading.Tasks;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
 public class LevelLoader
 {
+    public Subject<Unit> OnLevelLoaded = new Subject<Unit>();
+
     private readonly LevelsDescriptor levelsDescriptor;
     private readonly PrefabKeyFactory prefabKeyFactory;
     private readonly InteractablesLoader interactablesLoader;
@@ -35,13 +38,8 @@ public class LevelLoader
         border.gameObject.SetActive(true);
 
         await interactablesLoader.Load(currentLevelData);
-    }
 
-    private void UnloadLevel()
-    {
-        border.gameObject.SetActive(false);
-
-        interactablesLoader.Unload();
+        OnLevelLoaded.OnNext(Unit.Default);
     }
 
     public void CompleteLevel()
@@ -49,5 +47,12 @@ public class LevelLoader
         PlayerPrefs.SetString("CurrentLevel", currentLevelData.NextLevelName);
         UnloadLevel();
         LoadLevel().Forget();
+    }
+
+    private void UnloadLevel()
+    {
+        border.gameObject.SetActive(false);
+
+        interactablesLoader.Unload();
     }
 }

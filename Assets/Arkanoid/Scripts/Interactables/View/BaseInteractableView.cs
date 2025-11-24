@@ -1,7 +1,7 @@
 using UniRx;
 using UnityEngine;
 
-public abstract class InteractableView : MonoBehaviour, IInteractableView
+public abstract class BaseInteractableView : MonoBehaviour, IInteractableView
 {
     public IInteractableViewModel ViewModel { get; private set; } = null!;
 
@@ -24,7 +24,11 @@ public abstract class InteractableView : MonoBehaviour, IInteractableView
     }
 
     protected abstract void Init(IInteractableModel model);
-    protected virtual void Subscribe() => ViewModel.OnSetModel.Subscribe(Init).AddTo(Disposables);
+    protected virtual void Subscribe()
+    {
+        ViewModel.OnSetModel.Subscribe(Init).AddTo(Disposables);
+        ViewModel.OnActivate.Subscribe(isActive => Activate(isActive)).AddTo(Disposables);
+    }
 
     protected virtual void Awake() => InteractableRigidbody = GetComponent<Rigidbody>();
 

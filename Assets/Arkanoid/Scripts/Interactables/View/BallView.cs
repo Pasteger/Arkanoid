@@ -1,7 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class BallView : InteractableView
+public class BallView : BaseInteractableView
 {
     private bool isCollisionHandledThisFrame = false;
 

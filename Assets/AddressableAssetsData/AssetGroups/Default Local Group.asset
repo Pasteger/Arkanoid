@@ -45,6 +45,10 @@ MonoBehaviour:
     m_Address: HUDView.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
+  - m_GUID: bfaae500f10615d4aac36cdbc3dede9f
+    m_Address: EndGameView.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
   m_ReadOnly: 0
   m_Settings: {fileID: 11400000, guid: e28955d5e82b1a8418b377ff88381e66, type: 2}
   m_SchemaSet:

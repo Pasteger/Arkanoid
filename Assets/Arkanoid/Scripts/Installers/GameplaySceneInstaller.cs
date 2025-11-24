@@ -26,6 +26,7 @@ public class GameplaySceneInstaller : MonoInstaller
         Container.Bind<InteractablesLoader>().AsSingle();
         Container.BindInterfacesAndSelfTo<LevelLoader>().AsSingle();
         Container.BindInterfacesAndSelfTo<GameExit>().AsSingle();
+        Container.BindInterfacesAndSelfTo<GameFinalizer>().AsSingle();
 
         Container.BindInterfacesAndSelfTo<UILoader>().AsSingle().NonLazy();
     }

@@ -155,7 +155,6 @@ MonoBehaviour:
   levelsDescriptor: {fileID: 11400000, guid: 2754db19ce49c7348b3d9113693bac6b, type: 2}
   interactablesDescriptor: {fileID: 11400000, guid: 973fc734f06007e4884295e97badb5eb, type: 2}
   uiModelsDescriptor: {fileID: 11400000, guid: e8a726c3b5ca8bf4b9d6ce53b49043b5, type: 2}
-  mainCanvas: {fileID: 690217940}
 --- !u!4 &7907271
 Transform:
   m_ObjectHideFlags: 0
