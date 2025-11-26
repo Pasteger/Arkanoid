@@ -1,5 +1,5 @@
-﻿using UniRx;
-using UnityEngine;
+﻿using System.Collections.Generic;
+using UniRx;
 using Zenject;
 
 public class EndGameViewModel : BaseUIViewModel
@@ -34,9 +34,14 @@ public class EndGameViewModel : BaseUIViewModel
         gameFinalizer.OnFinish.Subscribe(Activate).AddTo(Disposables);
     }
 
-    private void Activate(int score)
+    private void Activate(KeyValuePair<EndGameType, int> result)
     {
-        Score.Value = score;
+        if (result.Key != EndGameType.Win)
+        {
+            return;
+        }
+
+        Score.Value = result.Value;
         OnActivate.OnNext(true);
     }
 }

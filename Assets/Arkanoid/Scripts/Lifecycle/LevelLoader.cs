@@ -45,6 +45,11 @@ public class LevelLoader
     public void CompleteLevel()
     {
         PlayerPrefs.SetString("CurrentLevel", currentLevelData.NextLevelName);
+        ReloadLevel();
+    }
+
+    public void ReloadLevel()
+    {
         UnloadLevel();
         LoadLevel().Forget();
     }

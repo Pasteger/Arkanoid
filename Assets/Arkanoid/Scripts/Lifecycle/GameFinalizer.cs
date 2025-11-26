@@ -1,11 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
 public class GameFinalizer : IInitializable, IDisposable
 {
-    public readonly Subject<int> OnFinish = new Subject<int>();
+    public readonly Subject<KeyValuePair<EndGameType, int>> OnFinish = new Subject<KeyValuePair<EndGameType, int>>();
     
     private readonly BrickDestruction brickDestruction;
     private readonly CompositeDisposable compositeDisposable;
@@ -27,13 +28,15 @@ public class GameFinalizer : IInitializable, IDisposable
         counter = 0;
         goal = count;
     }
-    
+
+    public void GameOver() => OnFinish.OnNext(new KeyValuePair<EndGameType, int>(EndGameType.Over, 0));
+
     private void CheckFinal()
     {
         counter++;
         if (counter >= goal)
         {
-            OnFinish.OnNext(counter);
+            OnFinish.OnNext(new KeyValuePair<EndGameType, int>(EndGameType.Win, counter));
         }
     }
 
