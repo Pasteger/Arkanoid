@@ -34,7 +34,7 @@ public class PlatformMovement : IInitializable, IDisposable
 
     public void Collide(Collision other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("Ball")) return;
+      
 
         if (other.contacts[0].normal.x < 0)
         {

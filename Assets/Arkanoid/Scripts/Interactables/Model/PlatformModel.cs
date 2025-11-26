@@ -7,6 +7,7 @@ public class PlatformModel : InteractableModel
 {
     [field: SerializeField]
     public ReactiveProperty<float> MoveSpeed { get; private set; } = new ReactiveProperty<float>();
+    [field: SerializeField] public LayerMask BallLayer { get; set; } = 0;
 
     public PlatformModel()
     {

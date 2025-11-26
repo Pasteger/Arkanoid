@@ -30,7 +30,7 @@ public class BallViewModel : BaseInteractableViewModel
 
     public override void Collide(Collision other)
     {
-        if (other.gameObject.layer == LayerMask.NameToLayer("DeathTrigger"))
+        if (other.gameObject.layer == ballModel.DeathTriggerLayer)
         {
             OnActivate.OnNext(false);
             gameFinalizer.GameOver();

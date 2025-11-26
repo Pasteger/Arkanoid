@@ -19,5 +19,11 @@ public class PlatformViewModel : BaseInteractableViewModel
     }
 
     public override void Update(Rigidbody rigidbody) => platformMovement.Move(rigidbody, platformModel.MoveSpeed.Value);
-    public override void Collide(Collision other) => platformMovement.Collide(other);
+
+    public override void Collide(Collision other)
+    {
+        if (other.gameObject.layer == platformModel.BallLayer) return; 
+        
+        platformMovement.Collide(other);
+    }
 }

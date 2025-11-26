@@ -11,6 +11,8 @@ public class BallModel : InteractableModel
     [field: SerializeField]
     public ReactiveProperty<Vector3> Direction { get; private set; } = new ReactiveProperty<Vector3>();
 
+    [field: SerializeField] public LayerMask DeathTriggerLayer { get; set; } = 0;
+
     public BallModel()
     {
     }

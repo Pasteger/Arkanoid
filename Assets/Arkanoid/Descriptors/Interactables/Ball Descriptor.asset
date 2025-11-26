@@ -20,3 +20,6 @@ MonoBehaviour:
       value: 15
     <Direction>k__BackingField:
       value: {x: 0.6, y: 0.8, z: 0}
+    <DeathTriggerLayer>k__BackingField:
+      serializedVersion: 2
+      m_Bits: 128
