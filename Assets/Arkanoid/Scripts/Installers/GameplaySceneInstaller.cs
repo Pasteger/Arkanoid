@@ -6,12 +6,17 @@ public class GameplaySceneInstaller : MonoInstaller
     [SerializeField] private LevelsDescriptor levelsDescriptor = null!;
     [SerializeField] private InteractablesDescriptor interactablesDescriptor = null!;
     [SerializeField] private UIModelsDescriptor uiModelsDescriptor = null!;
+    [SerializeField] private AudioDescriptor audioDescriptor = null!;
+    [SerializeField] private AudioSource audioSource = null!;
 
     public override void InstallBindings()
     {
         Container.Bind<LevelsDescriptor>().FromInstance(levelsDescriptor).AsSingle();
         Container.Bind<InteractablesDescriptor>().FromInstance(interactablesDescriptor).AsSingle();
         Container.Bind<UIModelsDescriptor>().FromInstance(uiModelsDescriptor).AsSingle();
+        Container.Bind<AudioDescriptor>().FromInstance(audioDescriptor).AsSingle();
+        
+        Container.Bind<AudioSource>().FromInstance(audioSource).AsSingle();
 
         Container.Bind<InteractablesFactory>().AsSingle();
         Container.Bind<UIFactory>().AsSingle();
@@ -27,7 +32,9 @@ public class GameplaySceneInstaller : MonoInstaller
         Container.BindInterfacesAndSelfTo<LevelLoader>().AsSingle();
         Container.BindInterfacesAndSelfTo<GameExit>().AsSingle();
         Container.BindInterfacesAndSelfTo<GameFinalizer>().AsSingle();
-
+        
+        Container.BindInterfacesAndSelfTo<AudioService>().AsSingle().NonLazy();
+        
         Container.BindInterfacesAndSelfTo<UILoader>().AsSingle().NonLazy();
     }
 }

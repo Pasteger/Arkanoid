@@ -22,7 +22,7 @@ public class PlatformViewModel : BaseInteractableViewModel
 
     public override void Collide(Collision other)
     {
-        if (other.gameObject.layer == platformModel.BallLayer) return; 
+        if ((platformModel.BallLayer & (1 << other.gameObject.layer)) != 0) return; 
         
         platformMovement.Collide(other);
     }

@@ -9,13 +9,15 @@ public class EndGameViewModel : BaseUIViewModel
     private LevelLoader levelLoader;
     private GameExit gameExit;
     private GameFinalizer gameFinalizer;
+    private AudioService audioService;
 
     [Inject]
-    public void Construct(LevelLoader loader, GameExit exit, GameFinalizer finalizer)
+    public void Construct(LevelLoader loader, GameExit exit, GameFinalizer finalizer, AudioService audios)
     {
         levelLoader = loader;
         gameExit = exit;
         gameFinalizer = finalizer;
+        audioService = audios;
     }
 
     public void NextLevel()
@@ -43,5 +45,6 @@ public class EndGameViewModel : BaseUIViewModel
 
         Score.Value = result.Value;
         OnActivate.OnNext(true);
+        audioService.PlaySound(SoundName.GameWin);
     }
 }

@@ -13,6 +13,9 @@ public class PlatformModel : InteractableModel
     {
     }
 
-    public PlatformModel(PlatformModel referenceModel) : base(referenceModel) =>
+    public PlatformModel(PlatformModel referenceModel) : base(referenceModel)
+    {
         MoveSpeed.Value = referenceModel.MoveSpeed.Value;
+        BallLayer = referenceModel.BallLayer;
+    }
 }

@@ -21,5 +21,6 @@ public class BallModel : InteractableModel
     {
         MoveSpeed.Value = referenceModel.MoveSpeed.Value;
         Direction.Value = referenceModel.Direction.Value;
+        DeathTriggerLayer = referenceModel.DeathTriggerLayer;
     }
 }

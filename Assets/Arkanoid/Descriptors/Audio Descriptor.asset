@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1adaf9bb50e047988f4efc81938bfb29, type: 3}
+  m_Name: Audio Descriptor
+  m_EditorClassIdentifier: 
+  <Sounds>k__BackingField:
+    <SerializableKeyValuePairList>k__BackingField:
+    - Key: 0
+      Value:
+        <Clip>k__BackingField: {fileID: 8300000, guid: a91113e6604a80d44862c4cfab1c5234, type: 3}
+        <Volume>k__BackingField: 1
+    - Key: 1
+      Value:
+        <Clip>k__BackingField: {fileID: 8300000, guid: 8d75f29848b4c564bb1809ba9603a34a, type: 3}
+        <Volume>k__BackingField: 1
+    - Key: 2
+      Value:
+        <Clip>k__BackingField: {fileID: 8300000, guid: 52cfa4677fd76c84f8367dc2c0437024, type: 3}
+        <Volume>k__BackingField: 1
+    - Key: 3
+      Value:
+        <Clip>k__BackingField: {fileID: 8300000, guid: 9a1859c8e0078a74b8eb8b10aced85ba, type: 3}
+        <Volume>k__BackingField: 1
+  <Musics>k__BackingField:
+  - <Clip>k__BackingField: {fileID: 8300000, guid: b46e90ec8e929d048b67532ed3851a4b, type: 3}
+    <Volume>k__BackingField: 0.25
+  - <Clip>k__BackingField: {fileID: 8300000, guid: f4f0c5c2a42e89146bbef7cb31a13872, type: 3}
+    <Volume>k__BackingField: 0.25
+  - <Clip>k__BackingField: {fileID: 8300000, guid: 1ce3878e4f1b7174d936e17b78147454, type: 3}
+    <Volume>k__BackingField: 0.25

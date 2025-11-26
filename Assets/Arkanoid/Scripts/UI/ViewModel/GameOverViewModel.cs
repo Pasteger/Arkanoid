@@ -6,12 +6,14 @@ public class GameOverViewModel : BaseUIViewModel
 {
     private LevelLoader levelLoader;
     private GameFinalizer gameFinalizer;
+    private AudioService audioService;
 
     [Inject]
-    public void Construct(LevelLoader loader, GameFinalizer finalizer)
+    public void Construct(LevelLoader loader, GameFinalizer finalizer, AudioService audios)
     {
         levelLoader = loader;
         gameFinalizer = finalizer;
+        audioService = audios;
     }
 
     public void Restart()
@@ -33,5 +35,6 @@ public class GameOverViewModel : BaseUIViewModel
         }
 
         OnActivate.OnNext(true);
+        audioService.PlaySound(SoundName.GameOver);
     }
 }

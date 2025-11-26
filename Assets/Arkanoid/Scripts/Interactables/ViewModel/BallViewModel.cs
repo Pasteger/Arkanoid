@@ -6,16 +6,18 @@ public class BallViewModel : BaseInteractableViewModel
 {
     private BallMovement ballMovement;
     private GameFinalizer gameFinalizer;
+    private AudioService audioService;
 
     private Vector3 DefaultDirection;
 
     private BallModel ballModel => (BallModel)Model;
 
     [Inject]
-    public void Construct(BallMovement movement, GameFinalizer finalizer)
+    public void Construct(BallMovement movement, GameFinalizer finalizer, AudioService audios)
     {
         ballMovement = movement;
         gameFinalizer = finalizer;
+        audioService = audios;
 
         gameFinalizer.OnFinish.Subscribe(_ => Deactivate()).AddTo(Disposables);
     }
@@ -30,7 +32,7 @@ public class BallViewModel : BaseInteractableViewModel
 
     public override void Collide(Collision other)
     {
-        if (other.gameObject.layer == ballModel.DeathTriggerLayer)
+        if ((ballModel.DeathTriggerLayer & (1 << other.gameObject.layer)) != 0)
         {
             OnActivate.OnNext(false);
             gameFinalizer.GameOver();
@@ -38,6 +40,7 @@ public class BallViewModel : BaseInteractableViewModel
         else
         {
             ballMovement.Collide(other, ballModel);
+            audioService.PlaySound(SoundName.BallCollide);
         }
     }
 
