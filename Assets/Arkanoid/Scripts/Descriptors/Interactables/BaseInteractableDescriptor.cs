@@ -1,9 +1,14 @@
-﻿using UnityEngine;
+﻿using MiniIT.INTERACTABLES.MODEL;
+using MiniIT.INTERACTABLES.VIEWMODEL;
+using UnityEngine;
 
-public abstract class BaseInteractableDescriptor : ScriptableObject
+namespace MiniIT.DESCRIPTORS.INTERACTABLES
 {
-    [field: SerializeField] public string PrefabKey { get; private set; }
+    public abstract class BaseInteractableDescriptor : ScriptableObject
+    {
+        [field: SerializeField] public string PrefabKey { get; private set; }
     
-    public abstract IInteractableViewModel ViewModel{ get; }
-    public abstract IInteractableModel Model{ get; }
+        public abstract IInteractableViewModel ViewModel{ get; }
+        public abstract IInteractableModel Model{ get; }
+    }
 }

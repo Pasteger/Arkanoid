@@ -1,7 +1,11 @@
-﻿using UnityEngine;
+﻿using MiniIT.ENUM;
+using UnityEngine;
 
-public interface IInteractableModel
+namespace MiniIT.INTERACTABLES.MODEL
 {
-    public InteractableType Type { get; }
-    public Vector3 Position { get; }
+    public interface IInteractableModel
+    {
+        public InteractableType Type { get; }
+        public Vector3 Position { get; }
+    }
 }

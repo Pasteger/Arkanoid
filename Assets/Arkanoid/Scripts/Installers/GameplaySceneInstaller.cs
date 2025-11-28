@@ -1,40 +1,69 @@
+using MiniIT.AUDIO;
+using MiniIT.DESCRIPTORS;
+using MiniIT.FACTORIES;
+using MiniIT.LIFECYCLE;
+using MiniIT.MECHANICS;
 using UnityEngine;
 using Zenject;
 
-public class GameplaySceneInstaller : MonoInstaller
+namespace MiniIT.INSTALLERS
 {
-    [SerializeField] private LevelsDescriptor levelsDescriptor = null!;
-    [SerializeField] private InteractablesDescriptor interactablesDescriptor = null!;
-    [SerializeField] private UIModelsDescriptor uiModelsDescriptor = null!;
-    [SerializeField] private AudioDescriptor audioDescriptor = null!;
-    [SerializeField] private AudioSource audioSource = null!;
-
-    public override void InstallBindings()
+    public class GameplaySceneInstaller : MonoInstaller
     {
-        Container.Bind<LevelsDescriptor>().FromInstance(levelsDescriptor).AsSingle();
-        Container.Bind<InteractablesDescriptor>().FromInstance(interactablesDescriptor).AsSingle();
-        Container.Bind<UIModelsDescriptor>().FromInstance(uiModelsDescriptor).AsSingle();
-        Container.Bind<AudioDescriptor>().FromInstance(audioDescriptor).AsSingle();
-        
-        Container.Bind<AudioSource>().FromInstance(audioSource).AsSingle();
+        [SerializeField]
+        private LevelsDescriptor levelsDescriptor = null;
 
-        Container.Bind<InteractablesFactory>().AsSingle();
-        Container.Bind<UIFactory>().AsSingle();
-        Container.Bind<PrefabKeyFactory>().AsSingle();
+        [SerializeField]
+        private InteractablesDescriptor interactablesDescriptor = null;
 
-        Container.Bind<InteractablesPool>().AsSingle();
-        
-        Container.Bind<BrickDestruction>().AsSingle();
-        Container.Bind<BallMovement>().AsSingle();
-        Container.BindInterfacesAndSelfTo<PlatformMovement>().AsSingle();
+        [SerializeField]
+        private UIModelsDescriptor uiModelsDescriptor = null;
 
-        Container.Bind<InteractablesLoader>().AsSingle();
-        Container.BindInterfacesAndSelfTo<LevelLoader>().AsSingle();
-        Container.BindInterfacesAndSelfTo<GameExit>().AsSingle();
-        Container.BindInterfacesAndSelfTo<GameFinalizer>().AsSingle();
-        
-        Container.BindInterfacesAndSelfTo<AudioService>().AsSingle().NonLazy();
-        
-        Container.BindInterfacesAndSelfTo<UILoader>().AsSingle().NonLazy();
+        [SerializeField]
+        private AudioDescriptor audioDescriptor = null;
+
+        [SerializeField]
+        private AudioSource audioSource = null;
+
+        public override void InstallBindings()
+        {
+            Container.Bind<LevelsDescriptor>()
+                     .FromInstance(levelsDescriptor)
+                     .AsSingle();
+
+            Container.Bind<InteractablesDescriptor>()
+                     .FromInstance(interactablesDescriptor)
+                     .AsSingle();
+
+            Container.Bind<UIModelsDescriptor>()
+                     .FromInstance(uiModelsDescriptor)
+                     .AsSingle();
+
+            Container.Bind<AudioDescriptor>()
+                     .FromInstance(audioDescriptor)
+                     .AsSingle();
+
+            Container.Bind<AudioSource>()
+                     .FromInstance(audioSource)
+                     .AsSingle();
+            
+            Container.Bind<InteractablesFactory>().AsSingle();
+            Container.Bind<UIFactory>().AsSingle();
+            Container.Bind<PrefabKeyFactory>().AsSingle();
+
+            Container.Bind<InteractablesPool>().AsSingle();
+
+            Container.Bind<BrickDestruction>().AsSingle();
+            Container.Bind<BallMovement>().AsSingle();
+            Container.BindInterfacesAndSelfTo<PlatformMovement>().AsSingle();
+            
+            Container.Bind<InteractablesLoader>().AsSingle();
+            Container.BindInterfacesAndSelfTo<LevelLoader>().AsSingle();
+            Container.BindInterfacesAndSelfTo<GameExit>().AsSingle();
+            Container.BindInterfacesAndSelfTo<GameFinalizer>().AsSingle();
+
+            Container.BindInterfacesAndSelfTo<AudioService>().AsSingle().NonLazy();
+            Container.BindInterfacesAndSelfTo<UILoader>().AsSingle().NonLazy();
+        }
     }
 }

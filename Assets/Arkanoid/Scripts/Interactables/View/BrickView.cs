@@ -1,43 +1,49 @@
-﻿using UniRx;
+﻿using MiniIT.EFFECTS;
+using MiniIT.INTERACTABLES.MODEL;
+using MiniIT.INTERACTABLES.VIEWMODEL;
+using UniRx;
 using UnityEngine;
 
-public class BrickView : BaseInteractableView
+namespace MiniIT.INTERACTABLES.VIEW
 {
-    [SerializeField] private BrickDestructionEffect brickDestructionEffect = null!;
-
-    private readonly ReactiveProperty<Color> color = new ReactiveProperty<Color>();
-    private bool isUnbreakable = false;
-
-    private Renderer brickRenderer;
-
-    protected override void Awake()
+    public class BrickView : BaseInteractableView
     {
-        base.Awake();
-        brickRenderer = GetComponent<Renderer>();
-        color.Subscribe(c => brickRenderer.material.color = c);
-    }
+        [SerializeField] private BrickDestructionEffect brickDestructionEffect = null!;
 
-    protected override void Init(IInteractableModel model)
-    {
-        BrickModel brickModel = (BrickModel)model;
+        private readonly ReactiveProperty<Color> color = new ReactiveProperty<Color>();
+        private bool isUnbreakable = false;
 
-        transform.position = brickModel.Position;
-        color.Value = brickModel.IsUnbreakable ? brickModel.UnbreakableColor : brickModel.Color;
-        isUnbreakable = brickModel.IsUnbreakable;
-    }
+        private Renderer brickRenderer;
 
-    protected override void Subscribe()
-    {
-        base.Subscribe();
+        protected override void Awake()
+        {
+            base.Awake();
+            brickRenderer = GetComponent<Renderer>();
+            color.Subscribe(c => brickRenderer.material.color = c);
+        }
 
-        BrickViewModel brickViewModel = (BrickViewModel)ViewModel;
+        protected override void Init(IInteractableModel model)
+        {
+            BrickModel brickModel = (BrickModel)model;
 
-        brickViewModel.OnDestroy.Subscribe(_ => Destruction()).AddTo(Disposables);
-    }
+            transform.position = brickModel.Position;
+            color.Value = brickModel.IsUnbreakable ? brickModel.UnbreakableColor : brickModel.Color;
+            isUnbreakable = brickModel.IsUnbreakable;
+        }
 
-    private void Destruction()
-    {
-        Instantiate(brickDestructionEffect, transform.position, Quaternion.identity);
-        Activate(false);
+        protected override void Subscribe()
+        {
+            base.Subscribe();
+
+            BrickViewModel brickViewModel = (BrickViewModel)ViewModel;
+
+            brickViewModel.OnDestroy.Subscribe(_ => Destruction()).AddTo(Disposables);
+        }
+
+        private void Destruction()
+        {
+            Instantiate(brickDestructionEffect, transform.position, Quaternion.identity);
+            Activate(false);
+        }
     }
 }

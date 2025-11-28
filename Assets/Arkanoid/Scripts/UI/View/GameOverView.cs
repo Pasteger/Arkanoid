@@ -1,27 +1,32 @@
-﻿using TMPro;
+﻿using MiniIT.UI.MODEL;
+using MiniIT.UI.VIEWMODEL;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GameOverView : BaseUIView
+namespace MiniIT.UI.VIEW
 {
-    [SerializeField] private Button restartButton;
-    [SerializeField] private TMP_Text restartButtonText;
-    [SerializeField] private TMP_Text messageText;
+    public class GameOverView : BaseUIView
+    {
+        [SerializeField] private Button restartButton;
+        [SerializeField] private TMP_Text restartButtonText;
+        [SerializeField] private TMP_Text messageText;
     
-    protected override void Init(IUIModel uiModel)
-    {
-        GameOverModel model = (GameOverModel)uiModel;
-        GameOverViewModel viewModel = (GameOverViewModel)ViewModel;
+        protected override void Init(IUIModel uiModel)
+        {
+            GameOverModel model = (GameOverModel)uiModel;
+            GameOverViewModel viewModel = (GameOverViewModel)ViewModel;
 
-        restartButtonText.text = model.RestartButtonText;
-        messageText.text = model.MessageText;
+            restartButtonText.text = model.RestartButtonText;
+            messageText.text = model.MessageText;
 
-        restartButton.onClick.AddListener(() => viewModel.Restart());
-    }
+            restartButton.onClick.AddListener(() => viewModel.Restart());
+        }
 
-    public override void Dispose()
-    {
-        base.Dispose();
-        restartButton.onClick.RemoveAllListeners();
+        public override void Dispose()
+        {
+            base.Dispose();
+            restartButton.onClick.RemoveAllListeners();
+        }
     }
 }

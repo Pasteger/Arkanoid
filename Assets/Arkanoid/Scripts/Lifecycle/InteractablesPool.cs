@@ -2,91 +2,97 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Cysharp.Threading.Tasks;
+using MiniIT.ENUM;
+using MiniIT.FACTORIES;
+using MiniIT.INTERACTABLES.VIEW;
 using UnityEngine;
 using Zenject;
 
-public class InteractablesPool : IDisposable
+namespace MiniIT.LIFECYCLE
 {
-    private readonly InteractablesFactory interactablesFactory;
-    private readonly Dictionary<InteractableType, Queue<IInteractableView>> pools;
-    private readonly Dictionary<InteractableType, HashSet<IInteractableView>> activePools;
-
-    [Inject]
-    public InteractablesPool(InteractablesFactory factory)
+    public class InteractablesPool : IDisposable
     {
-        interactablesFactory = factory;
-        pools = new Dictionary<InteractableType, Queue<IInteractableView>>();
-        activePools = new Dictionary<InteractableType, HashSet<IInteractableView>>();
-    }
+        private readonly InteractablesFactory interactablesFactory;
+        private readonly Dictionary<InteractableType, Queue<IInteractableView>> pools;
+        private readonly Dictionary<InteractableType, HashSet<IInteractableView>> activePools;
 
-    public async UniTask<IInteractableView> Get(InteractableType interactableType, Vector3 position)
-    {
-        pools.TryGetValue(interactableType, out Queue<IInteractableView> queue);
-
-        IInteractableView view = queue == null || queue.Count <= 0
-            ? await interactablesFactory.Create(interactableType)
-            : queue.Dequeue();
-
-        view.Activate(true, position);
-
-        if (!activePools.TryGetValue(interactableType, out HashSet<IInteractableView> activeHashSet))
+        [Inject]
+        public InteractablesPool(InteractablesFactory factory)
         {
-            activeHashSet = new HashSet<IInteractableView>();
-            activePools[interactableType] = activeHashSet;
+            interactablesFactory = factory;
+            pools = new Dictionary<InteractableType, Queue<IInteractableView>>();
+            activePools = new Dictionary<InteractableType, HashSet<IInteractableView>>();
         }
 
-        activeHashSet.Add(view);
-
-        return view;
-    }
-
-    public void Release(IInteractableView view)
-    {
-        view.Activate(false);
-        InteractableType type = view.ViewModel.Type;
-
-        activePools.TryGetValue(type, out HashSet<IInteractableView> activeHashSet);
-        activeHashSet?.Remove(view);
-
-        if (!pools.TryGetValue(type, out Queue<IInteractableView> queue))
+        public async UniTask<IInteractableView> Get(InteractableType interactableType, Vector3 position)
         {
-            queue = new Queue<IInteractableView>();
-            pools[type] = queue;
-        }
+            pools.TryGetValue(interactableType, out Queue<IInteractableView> queue);
 
-        queue.Enqueue(view);
-    }
+            IInteractableView view = queue == null || queue.Count <= 0
+                ? await interactablesFactory.Create(interactableType)
+                : queue.Dequeue();
 
-    public void ReleaseAll()
-    {
-        List<IInteractableView> interactables = activePools.Values.SelectMany(set => set).ToList();
+            view.Activate(true, position);
 
-        for (int index = 0; index < interactables.Count; index++)
-        {
-            Release(interactables[index]);
-        }
-    }
-
-    public void Clear()
-    {
-        foreach (HashSet<IInteractableView> set in activePools.Values)
-        {
-            foreach (IInteractableView view in set)
+            if (!activePools.TryGetValue(interactableType, out HashSet<IInteractableView> activeHashSet))
             {
-                view.Dispose();
+                activeHashSet = new HashSet<IInteractableView>();
+                activePools[interactableType] = activeHashSet;
             }
 
-            set.Clear();
+            activeHashSet.Add(view);
+
+            return view;
         }
 
-        foreach (Queue<IInteractableView> queue in pools.Values)
+        public void Release(IInteractableView view)
         {
-            queue.Clear();
+            view.Activate(false);
+            InteractableType type = view.ViewModel.Type;
+
+            activePools.TryGetValue(type, out HashSet<IInteractableView> activeHashSet);
+            activeHashSet?.Remove(view);
+
+            if (!pools.TryGetValue(type, out Queue<IInteractableView> queue))
+            {
+                queue = new Queue<IInteractableView>();
+                pools[type] = queue;
+            }
+
+            queue.Enqueue(view);
         }
 
-        pools.Clear();
-        activePools.Clear();
-    }
+        public void ReleaseAll()
+        {
+            List<IInteractableView> interactables = activePools.Values.SelectMany(set => set).ToList();
 
-    public void Dispose() => Clear();
+            for (int index = 0; index < interactables.Count; index++)
+            {
+                Release(interactables[index]);
+            }
+        }
+
+        public void Clear()
+        {
+            foreach (HashSet<IInteractableView> set in activePools.Values)
+            {
+                foreach (IInteractableView view in set)
+                {
+                    view.Dispose();
+                }
+
+                set.Clear();
+            }
+
+            foreach (Queue<IInteractableView> queue in pools.Values)
+            {
+                queue.Clear();
+            }
+
+            pools.Clear();
+            activePools.Clear();
+        }
+
+        public void Dispose() => Clear();
+    }
 }

@@ -4,53 +4,65 @@ using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Zenject;
 
-public class PrefabKeyFactory
+namespace MiniIT.FACTORIES
 {
-    private readonly DiContainer                             diContainer;
-    private readonly Dictionary<string, GameObject>          prefabs;
-    private readonly Dictionary<string, UniTask<GameObject>> loadingTasks;
-
-    [Inject]
-    public PrefabKeyFactory(DiContainer container)
+    public class PrefabKeyFactory
     {
-        diContainer = container;
+        private readonly DiContainer                                      diContainer     = null;
 
-        prefabs = new Dictionary<string, GameObject>();
-        loadingTasks = new Dictionary<string, UniTask<GameObject>>();
-    }
+        private readonly Dictionary<string, GameObject>                   prefabs         = null;
+        private readonly Dictionary<string, UniTask<GameObject>>          loadingTasks    = null;
 
-    public async UniTask<T> Create<T>(string prefabKey)
-    {
-        GameObject prefab = await GetOrLoadPrefab(prefabKey);
-        return diContainer.InstantiatePrefab(prefab).GetComponent<T>();
-    }
-
-    private UniTask<GameObject> GetOrLoadPrefab(string key)
-    {
-        if (prefabs.TryGetValue(key, out GameObject prefab))
-            return UniTask.FromResult(prefab);
-
-        if (loadingTasks.TryGetValue(key, out UniTask<GameObject> existingTask))
-            return existingTask;
-
-        UniTask<GameObject> task = LoadAndCache(key);
-        loadingTasks[key] = task;
-
-        return task;
-    }
-
-    private async UniTask<GameObject> LoadAndCache(string key)
-    {
-        try
+        [Inject]
+        public PrefabKeyFactory(DiContainer diContainer)
         {
-            GameObject prefab = await Addressables.LoadAssetAsync<GameObject>(key);
+            this.diContainer = diContainer;
 
-            prefabs[key] = prefab;
-            return prefab;
+            prefabs      = new Dictionary<string, GameObject>();
+            loadingTasks = new Dictionary<string, UniTask<GameObject>>();
         }
-        finally
+        
+        public async UniTask<T> Create<T>(string prefabKey) where T : class
         {
-            loadingTasks.Remove(key);
+            GameObject prefab = await GetOrLoadPrefabAsync(prefabKey);
+
+            GameObject instance = diContainer.InstantiatePrefab(prefab);
+
+            return instance.GetComponent<T>();
+        }
+
+        private UniTask<GameObject> GetOrLoadPrefabAsync(string key)
+        {
+            if (prefabs.TryGetValue(key, out GameObject cachedPrefab))
+            {
+                return UniTask.FromResult(cachedPrefab);
+            }
+
+            if (loadingTasks.TryGetValue(key, out UniTask<GameObject> existingTask))
+            {
+                return existingTask;
+            }
+
+            UniTask<GameObject> loadingTask = LoadAndCacheAsync(key);
+            loadingTasks[key] = loadingTask;
+
+            return loadingTask;
+        }
+        
+        private async UniTask<GameObject> LoadAndCacheAsync(string key)
+        {
+            try
+            {
+                GameObject prefab = await Addressables.LoadAssetAsync<GameObject>(key);
+
+                prefabs[key] = prefab;
+
+                return prefab;
+            }
+            finally
+            {
+                loadingTasks.Remove(key);
+            }
         }
     }
 }

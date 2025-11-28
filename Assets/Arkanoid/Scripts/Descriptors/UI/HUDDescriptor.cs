@@ -1,11 +1,15 @@
-﻿using System;
+﻿using MiniIT.UI.MODEL;
+using MiniIT.UI.VIEWMODEL;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "HUD Descriptor", menuName = "UI Descriptors/HUD Descriptor")]
-public class HUDDescriptor : BaseUIDescriptor
+namespace MiniIT.DESCRIPTORS.UI
 {
-    [field: SerializeField] public HUDModel HUDModel { get; private set; }
+    [CreateAssetMenu(fileName = "HUD Descriptor", menuName = "UI Descriptors/HUD Descriptor")]
+    public class HUDDescriptor : BaseUIDescriptor
+    {
+        [field: SerializeField] public HUDModel HUDModel { get; private set; }
 
-    public override IUIViewModel ViewModel => new HUDViewModel();
-    public override IUIModel Model => new HUDModel(HUDModel);
+        public override IUIViewModel ViewModel => new HUDViewModel();
+        public override IUIModel Model => new HUDModel(HUDModel);
+    }
 }

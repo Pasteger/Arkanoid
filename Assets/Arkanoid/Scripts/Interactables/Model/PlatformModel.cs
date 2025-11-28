@@ -2,20 +2,23 @@
 using UniRx;
 using UnityEngine;
 
-[Serializable]
-public class PlatformModel : InteractableModel
+namespace MiniIT.INTERACTABLES.MODEL
 {
-    [field: SerializeField]
-    public ReactiveProperty<float> MoveSpeed { get; private set; } = new ReactiveProperty<float>();
-    [field: SerializeField] public LayerMask BallLayer { get; set; } = 0;
-
-    public PlatformModel()
+    [Serializable]
+    public class PlatformModel : InteractableModel
     {
-    }
+        [field: SerializeField]
+        public ReactiveProperty<float> MoveSpeed { get; private set; } = new ReactiveProperty<float>();
+        [field: SerializeField] public LayerMask BallLayer { get; set; } = 0;
 
-    public PlatformModel(PlatformModel referenceModel) : base(referenceModel)
-    {
-        MoveSpeed.Value = referenceModel.MoveSpeed.Value;
-        BallLayer = referenceModel.BallLayer;
+        public PlatformModel()
+        {
+        }
+
+        public PlatformModel(PlatformModel referenceModel) : base(referenceModel)
+        {
+            MoveSpeed.Value = referenceModel.MoveSpeed.Value;
+            BallLayer = referenceModel.BallLayer;
+        }
     }
 }

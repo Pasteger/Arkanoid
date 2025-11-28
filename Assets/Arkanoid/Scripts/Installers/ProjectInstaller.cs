@@ -1,15 +1,24 @@
+using MiniIT.BOOTSTRAP;
+using MiniIT.DESCRIPTORS;
 using UnityEngine;
 using Zenject;
 
-[CreateAssetMenu(fileName = "Project Installer", menuName = "Project Installer")]
-public class ProjectInstaller : ScriptableObjectInstaller
+namespace MiniIT.INSTALLERS
 {
-    [SerializeField] private ProjectDescriptor projectDescriptor = null!;
-
-    public override void InstallBindings()
+    [CreateAssetMenu(fileName = "Project Installer", menuName = "Project Installer")]
+    public class ProjectInstaller : ScriptableObjectInstaller
     {
-        Container.Bind<ProjectDescriptor>().FromInstance(projectDescriptor).AsSingle();
+        [SerializeField] private ProjectDescriptor projectDescriptor = null!;
 
-        Container.BindInterfacesAndSelfTo<Bootstrap>().AsSingle().NonLazy();
+        public override void InstallBindings()
+        {
+            Container.Bind<ProjectDescriptor>()
+                .FromInstance(projectDescriptor)
+                .AsSingle();
+
+            Container.BindInterfacesAndSelfTo<Bootstrap>()
+                .AsSingle()
+                .NonLazy();
+        }
     }
 }

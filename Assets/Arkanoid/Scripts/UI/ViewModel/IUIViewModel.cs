@@ -1,11 +1,15 @@
 ﻿using System;
+using MiniIT.UI.MODEL;
 using UniRx;
 
-public interface IUIViewModel : IDisposable
+namespace MiniIT.UI.VIEWMODEL
 {
-    public Subject<IUIModel> OnInit { get; }
-    public Subject<bool> OnActivate { get; }
+    public interface IUIViewModel : IDisposable
+    {
+        public Subject<IUIModel> OnInit { get; }
+        public Subject<bool> OnActivate { get; }
 
-    public void SetModel(IUIModel model);
-    public void InitView();
+        public void SetModel(IUIModel model);
+        public void InitView();
+    }
 }

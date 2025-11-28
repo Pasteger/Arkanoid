@@ -1,35 +1,42 @@
-﻿using UniRx;
+﻿using MiniIT.AUDIO;
+using MiniIT.ENUM;
+using MiniIT.INTERACTABLES.MODEL;
+using MiniIT.MECHANICS;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
-public class BrickViewModel : BaseInteractableViewModel
+namespace MiniIT.INTERACTABLES.VIEWMODEL
 {
-    public readonly Subject<Unit> OnDestroy = new Subject<Unit>();
-
-    private BrickDestruction brickDestruction;
-    private AudioService audioService;
-
-    private BrickModel brickModel = null;
-
-    [Inject]
-    public void Construct(BrickDestruction destruction, AudioService audios)
+    public class BrickViewModel : BaseInteractableViewModel
     {
-        brickDestruction = destruction;
-        audioService = audios;
-    }
+        public readonly Subject<Unit> OnDestroy = new Subject<Unit>();
 
-    public override void SetModel(IInteractableModel model)
-    {
-        base.SetModel(model);
-        brickModel = (BrickModel)model;
-    }
+        private BrickDestruction brickDestruction;
+        private AudioService audioService;
 
-    public override void Collide(Collision other)
-    {
-        if (brickDestruction.Collide(other, brickModel.IsUnbreakable))
+        private BrickModel brickModel = null;
+
+        [Inject]
+        public void Construct(BrickDestruction destruction, AudioService audios)
         {
-            audioService.PlaySound(SoundName.BrickDestroy);
-            OnDestroy.OnNext(Unit.Default);
+            brickDestruction = destruction;
+            audioService = audios;
+        }
+
+        public override void SetModel(IInteractableModel model)
+        {
+            base.SetModel(model);
+            brickModel = (BrickModel)model;
+        }
+
+        public override void Collide(Collision other)
+        {
+            if (brickDestruction.Collide(other, brickModel.IsUnbreakable))
+            {
+                audioService.PlaySound(SoundName.BrickDestroy);
+                OnDestroy.OnNext(Unit.Default);
+            }
         }
     }
 }

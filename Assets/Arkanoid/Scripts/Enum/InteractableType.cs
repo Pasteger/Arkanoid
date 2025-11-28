@@ -1,6 +1,9 @@
-﻿public enum InteractableType
+﻿namespace MiniIT.ENUM
 {
-    Ball = 0,
-    Brick = 1,
-    Platform = 2,
+    public enum InteractableType
+    {
+        Ball = 0,
+        Brick = 1,
+        Platform = 2,
+    }
 }

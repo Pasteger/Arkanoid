@@ -1,52 +1,60 @@
-﻿using UniRx;
+﻿using MiniIT.AUDIO;
+using MiniIT.ENUM;
+using MiniIT.INTERACTABLES.MODEL;
+using MiniIT.LIFECYCLE;
+using MiniIT.MECHANICS;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
-public class BallViewModel : BaseInteractableViewModel
+namespace MiniIT.INTERACTABLES.VIEWMODEL
 {
-    private BallMovement ballMovement;
-    private GameFinalizer gameFinalizer;
-    private AudioService audioService;
-
-    private Vector3 DefaultDirection;
-
-    private BallModel ballModel => (BallModel)Model;
-
-    [Inject]
-    public void Construct(BallMovement movement, GameFinalizer finalizer, AudioService audios)
+    public class BallViewModel : BaseInteractableViewModel
     {
-        ballMovement = movement;
-        gameFinalizer = finalizer;
-        audioService = audios;
+        private BallMovement ballMovement;
+        private GameFinalizer gameFinalizer;
+        private AudioService audioService;
 
-        gameFinalizer.OnFinish.Subscribe(_ => Deactivate()).AddTo(Disposables);
-    }
+        private Vector3 DefaultDirection;
 
-    public override void SetModel(IInteractableModel model)
-    {
-        base.SetModel(model);
-        DefaultDirection = ballModel.Direction.Value;
-    }
+        private BallModel ballModel => (BallModel)Model;
 
-    public override void Update(Rigidbody rigidbody) => ballMovement.Move(rigidbody, ballModel);
+        [Inject]
+        public void Construct(BallMovement movement, GameFinalizer finalizer, AudioService audios)
+        {
+            ballMovement = movement;
+            gameFinalizer = finalizer;
+            audioService = audios;
 
-    public override void Collide(Collision other)
-    {
-        if ((ballModel.DeathTriggerLayer & (1 << other.gameObject.layer)) != 0)
+            gameFinalizer.OnFinish.Subscribe(_ => Deactivate()).AddTo(Disposables);
+        }
+
+        public override void SetModel(IInteractableModel model)
+        {
+            base.SetModel(model);
+            DefaultDirection = ballModel.Direction.Value;
+        }
+
+        public override void Update(Rigidbody rigidbody) => ballMovement.Move(rigidbody, ballModel);
+
+        public override void Collide(Collision other)
+        {
+            if ((ballModel.DeathTriggerLayer & (1 << other.gameObject.layer)) != 0)
+            {
+                OnActivate.OnNext(false);
+                gameFinalizer.GameOver();
+            }
+            else
+            {
+                ballMovement.Collide(other, ballModel);
+                audioService.PlaySound(SoundName.BallCollide);
+            }
+        }
+
+        private void Deactivate()
         {
             OnActivate.OnNext(false);
-            gameFinalizer.GameOver();
+            ballModel.Direction.Value = DefaultDirection;
         }
-        else
-        {
-            ballMovement.Collide(other, ballModel);
-            audioService.PlaySound(SoundName.BallCollide);
-        }
-    }
-
-    private void Deactivate()
-    {
-        OnActivate.OnNext(false);
-        ballModel.Direction.Value = DefaultDirection;
     }
 }

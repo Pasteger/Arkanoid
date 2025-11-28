@@ -1,39 +1,53 @@
 ﻿using Cysharp.Threading.Tasks;
+using MiniIT.DESCRIPTORS;
+using MiniIT.DESCRIPTORS.INTERACTABLES;
+using MiniIT.ENUM;
+using MiniIT.INTERACTABLES.MODEL;
+using MiniIT.INTERACTABLES.VIEW;
+using MiniIT.INTERACTABLES.VIEWMODEL;
 using Zenject;
 
-public class InteractablesFactory
+namespace MiniIT.FACTORIES
 {
-    private readonly PrefabKeyFactory prefabKeyFactory;
-    private readonly InteractablesDescriptor interactableDescriptor;
-    private readonly DiContainer diContainer;
-
-    [Inject]
-    public InteractablesFactory(
-        InteractablesDescriptor descriptor,
-        PrefabKeyFactory prefabFactory,
-        DiContainer container)
+    public class InteractablesFactory
     {
-        prefabKeyFactory = prefabFactory;
-        interactableDescriptor = descriptor;
-        diContainer = container;
+        private readonly PrefabKeyFactory        prefabKeyFactory        = null;
+        private readonly InteractablesDescriptor interactablesDescriptor = null;
+        private readonly DiContainer             diContainer             = null;
+
+        [Inject]
+        public InteractablesFactory(
+            InteractablesDescriptor interactablesDescriptor,
+            PrefabKeyFactory prefabKeyFactory,
+            DiContainer diContainer)
+        {
+            this.interactablesDescriptor = interactablesDescriptor;
+            this.prefabKeyFactory         = prefabKeyFactory;
+            this.diContainer              = diContainer;
+        }
+        
+        public async UniTask<IInteractableView> Create(InteractableType interactableType)
+        {
+            IInteractableView view = await CreateViewAsync(interactableType);
+
+            BaseInteractableDescriptor descriptor = interactablesDescriptor.GetDescriptor(interactableType);
+
+            IInteractableViewModel viewModel = descriptor.ViewModel;
+            IInteractableModel model         = descriptor.Model;
+
+            diContainer.Inject(viewModel);
+
+            viewModel.SetModel(model);
+            view.SetViewModel(viewModel);
+
+            return view;
+        }
+        
+        private async UniTask<IInteractableView> CreateViewAsync(InteractableType interactableType)
+        {
+            BaseInteractableDescriptor descriptor = interactablesDescriptor.GetDescriptor(interactableType);
+
+            return await prefabKeyFactory.Create<IInteractableView>(descriptor.PrefabKey);
+        }
     }
-
-    public async UniTask<IInteractableView> Create(InteractableType interactableType)
-    {
-        IInteractableView view = await CreateView(interactableType);
-
-        BaseInteractableDescriptor descriptor = interactableDescriptor.GetDescriptor(interactableType);
-
-        IInteractableViewModel viewModel = descriptor.ViewModel;
-        IInteractableModel model = descriptor.Model;
-
-        diContainer.Inject(viewModel);
-        viewModel.SetModel(model);
-        view.SetViewModel(viewModel);
-
-        return view;
-    }
-
-    private UniTask<IInteractableView> CreateView(InteractableType interactableType) =>
-        prefabKeyFactory.Create<IInteractableView>(interactableDescriptor.GetDescriptor(interactableType).PrefabKey);
 }

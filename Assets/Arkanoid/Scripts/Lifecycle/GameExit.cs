@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 
-public class GameExit
+namespace MiniIT.LIFECYCLE
 {
-    public void Exit() => Application.Quit();
+    public class GameExit
+    {
+        public void Exit() => Application.Quit();
+    }
 }

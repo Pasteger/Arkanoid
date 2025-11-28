@@ -2,18 +2,21 @@
 using UniRx;
 using UnityEngine;
 
-[Serializable]
-public class EndGameModel : IUIModel
+namespace MiniIT.UI.MODEL
 {
-    [field: SerializeField] public ReactiveProperty<int> Score { get; private set; } = new ReactiveProperty<int>();
-    [field: SerializeField] public string ScoreLabelText { get; private set; }
-    [field: SerializeField] public string NextButtonText { get; private set; }
-    [field: SerializeField] public string ExitButtonText { get; private set; }
-    
-    public EndGameModel(EndGameModel referenceModel)
+    [Serializable]
+    public class EndGameModel : IUIModel
     {
-        ScoreLabelText = referenceModel.ScoreLabelText;
-        NextButtonText = referenceModel.NextButtonText;
-        ExitButtonText = referenceModel.ExitButtonText;
+        [field: SerializeField] public ReactiveProperty<int> Score { get; private set; } = new ReactiveProperty<int>();
+        [field: SerializeField] public string ScoreLabelText { get; private set; }
+        [field: SerializeField] public string NextButtonText { get; private set; }
+        [field: SerializeField] public string ExitButtonText { get; private set; }
+    
+        public EndGameModel(EndGameModel referenceModel)
+        {
+            ScoreLabelText = referenceModel.ScoreLabelText;
+            NextButtonText = referenceModel.NextButtonText;
+            ExitButtonText = referenceModel.ExitButtonText;
+        }
     }
 }

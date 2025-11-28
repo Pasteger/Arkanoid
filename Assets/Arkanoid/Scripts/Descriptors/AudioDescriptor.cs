@@ -1,13 +1,18 @@
-﻿using UnityEngine;
+﻿using MiniIT.DATA;
+using MiniIT.ENUM;
+using UnityEngine;
 
-[CreateAssetMenu(fileName = "Audio Descriptor", menuName = "Game Descriptors/Audio Descriptor")]
-public class AudioDescriptor : ScriptableObject
+namespace MiniIT.DESCRIPTORS
 {
-    [field: SerializeField] private SerializableDictionary<SoundName, AudioClipData> Sounds { get; set; }
-    [field: SerializeField] private AudioClipData[] Musics { get; set; }
+    [CreateAssetMenu(fileName = "Audio Descriptor", menuName = "Game Descriptors/Audio Descriptor")]
+    public class AudioDescriptor : ScriptableObject
+    {
+        [field: SerializeField] private SerializableDictionary<SoundName, AudioClipData> Sounds { get; set; }
+        [field: SerializeField] private AudioClipData[] Musics { get; set; }
 
-    public int MusicsLength => Musics.Length;
+        public int MusicsLength => Musics.Length;
 
-    public AudioClipData GetSound(SoundName soundName) => Sounds.GetValue(soundName);
-    public AudioClipData GetMusic(int index) => Musics[index];
+        public AudioClipData GetSound(SoundName soundName) => Sounds.GetValue(soundName);
+        public AudioClipData GetMusic(int index) => Musics[index];
+    }
 }

@@ -1,40 +1,46 @@
 ﻿using System.Collections.Generic;
+using MiniIT.AUDIO;
+using MiniIT.ENUM;
+using MiniIT.LIFECYCLE;
 using UniRx;
 using Zenject;
 
-public class GameOverViewModel : BaseUIViewModel
+namespace MiniIT.UI.VIEWMODEL
 {
-    private LevelLoader levelLoader;
-    private GameFinalizer gameFinalizer;
-    private AudioService audioService;
-
-    [Inject]
-    public void Construct(LevelLoader loader, GameFinalizer finalizer, AudioService audios)
+    public class GameOverViewModel : BaseUIViewModel
     {
-        levelLoader = loader;
-        gameFinalizer = finalizer;
-        audioService = audios;
-    }
+        private LevelLoader levelLoader;
+        private GameFinalizer gameFinalizer;
+        private AudioService audioService;
 
-    public void Restart()
-    {
-        levelLoader.ReloadLevel();
-        OnActivate.OnNext(false);
-    }
-
-    protected override void Subscribe()
-    {
-        gameFinalizer.OnFinish.Subscribe(Activate).AddTo(Disposables);
-    }
-
-    private void Activate(KeyValuePair<EndGameType, int> result)
-    {
-        if (result.Key != EndGameType.Over)
+        [Inject]
+        public void Construct(LevelLoader loader, GameFinalizer finalizer, AudioService audios)
         {
-            return;
+            levelLoader = loader;
+            gameFinalizer = finalizer;
+            audioService = audios;
         }
 
-        OnActivate.OnNext(true);
-        audioService.PlaySound(SoundName.GameOver);
+        public void Restart()
+        {
+            levelLoader.ReloadLevel();
+            OnActivate.OnNext(false);
+        }
+
+        protected override void Subscribe()
+        {
+            gameFinalizer.OnFinish.Subscribe(Activate).AddTo(Disposables);
+        }
+
+        private void Activate(KeyValuePair<EndGameType, int> result)
+        {
+            if (result.Key != EndGameType.Over)
+            {
+                return;
+            }
+
+            OnActivate.OnNext(true);
+            audioService.PlaySound(SoundName.GameOver);
+        }
     }
 }

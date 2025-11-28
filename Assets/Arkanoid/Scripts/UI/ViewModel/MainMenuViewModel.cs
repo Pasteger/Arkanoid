@@ -1,27 +1,31 @@
 ﻿using Cysharp.Threading.Tasks;
+using MiniIT.LIFECYCLE;
 using Zenject;
 
-public class MainMenuViewModel : BaseUIViewModel
+namespace MiniIT.UI.VIEWMODEL
 {
-    private LevelLoader levelLoader;
-    private GameExit gameExit;
-
-    [Inject]
-    public void Construct(LevelLoader loader, GameExit exit)
+    public class MainMenuViewModel : BaseUIViewModel
     {
-        levelLoader = loader;
-        gameExit = exit;
-    }
+        private LevelLoader levelLoader;
+        private GameExit gameExit;
 
-    public void PlayGame()
-    {
-        levelLoader.LoadLevel().Forget();
-        OnActivate.OnNext(false);
-    }
+        [Inject]
+        public void Construct(LevelLoader loader, GameExit exit)
+        {
+            levelLoader = loader;
+            gameExit = exit;
+        }
 
-    public void ExitGame() => gameExit.Exit();
+        public void PlayGame()
+        {
+            levelLoader.LoadLevelAsync().Forget();
+            OnActivate.OnNext(false);
+        }
 
-    protected override void Subscribe()
-    {
+        public void ExitGame() => gameExit.Exit();
+
+        protected override void Subscribe()
+        {
+        }
     }
 }

@@ -1,36 +1,61 @@
 using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using MiniIT.ENUM;
+using MiniIT.FACTORIES;
+using MiniIT.UI.VIEW;
 using Zenject;
 
-public class UILoader : IInitializable, IDisposable
+namespace MiniIT.LIFECYCLE
 {
-    private readonly UIFactory uiFactory;
-
-    private readonly Dictionary<UIType, IUIView> views = new Dictionary<UIType, IUIView>();
-
-    public UILoader(UIFactory factory) => uiFactory = factory;
-
-    public void Initialize() => Load().Forget();
-
-    private async UniTask Load()
+    public class UILoader : IInitializable, IDisposable
     {
-        int count = Enum.GetNames(typeof(UIType)).Length;
-        for (int i = 0; i < count; i++)
-        {
-            IUIView uiView = await uiFactory.Create((UIType)i);
+        private readonly UIFactory                                      uiFactory = null;
 
-            views.Add((UIType)i, uiView);
+        private readonly Dictionary<UIType, IUIView>                    uiViews   = null;
+
+        [Inject]
+        public UILoader(UIFactory uiFactory)
+        {
+            this.uiFactory = uiFactory;
+
+            uiViews = new Dictionary<UIType, IUIView>();
+        }
+
+        public void Initialize()
+        {
+            LoadAllScreensAsync().Forget();
+        }
+
+        private async UniTask LoadAllScreensAsync()
+        {
+            foreach (UIType uiType in Enum.GetValues(typeof(UIType)))
+            {
+                IUIView view = await uiFactory.Create(uiType);
+
+                uiViews.Add(uiType, view);
+            }
+
+            ShowScreen(UIType.MainMenu);
         }
         
-        views[UIType.MainMenu].Activate(true);
-    }
-
-    public void Dispose()
-    {
-        foreach (IUIView view in views.Values)
+        public void ShowScreen(UIType uiType)
         {
-            view.Dispose();
+            foreach (KeyValuePair<UIType, IUIView> pair in uiViews)
+            {
+                bool isActive = pair.Key == uiType;
+                pair.Value.Activate(isActive);
+            }
+        }
+
+        public void Dispose()
+        {
+            foreach (IUIView view in uiViews.Values)
+            {
+                view.Dispose();
+            }
+
+            uiViews.Clear();
         }
     }
 }

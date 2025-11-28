@@ -1,15 +1,22 @@
+using MiniIT.DESCRIPTORS;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-public class Bootstrap : IInitializable
+namespace MiniIT.BOOTSTRAP
 {
-    private readonly ProjectDescriptor projectDescriptor;
-
-    [Inject]
-    public Bootstrap(ProjectDescriptor projectDescriptor)
+    public class Bootstrap : IInitializable
     {
-        this.projectDescriptor = projectDescriptor;
-    }
+        private readonly ProjectDescriptor projectDescriptor = null;
 
-    public void Initialize() => SceneManager.LoadScene(projectDescriptor.StartScene);
+        [Inject]
+        public Bootstrap(ProjectDescriptor projectDescriptor)
+        {
+            this.projectDescriptor = projectDescriptor;
+        }
+
+        public void Initialize()
+        {
+            SceneManager.LoadScene(projectDescriptor.StartScene);
+        }
+    }
 }

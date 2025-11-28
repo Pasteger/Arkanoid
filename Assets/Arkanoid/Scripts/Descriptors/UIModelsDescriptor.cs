@@ -1,9 +1,14 @@
-﻿using UnityEngine;
+﻿using MiniIT.DESCRIPTORS.UI;
+using MiniIT.ENUM;
+using UnityEngine;
 
-[CreateAssetMenu(fileName = "UI Models Descriptor", menuName = "Game Descriptors/UI Models Descriptor")]
-public class UIModelsDescriptor : ScriptableObject
+namespace MiniIT.DESCRIPTORS
 {
-    [SerializeField] private SerializableDictionary<UIType, BaseUIDescriptor> descriptors;
+    [CreateAssetMenu(fileName = "UI Models Descriptor", menuName = "Game Descriptors/UI Models Descriptor")]
+    public class UIModelsDescriptor : ScriptableObject
+    {
+        [SerializeField] private SerializableDictionary<UIType, BaseUIDescriptor> descriptors;
 
-    public BaseUIDescriptor GetDescriptor(UIType type) => descriptors.GetValue(type);
+        public BaseUIDescriptor GetDescriptor(UIType type) => descriptors.GetValue(type);
+    }
 }

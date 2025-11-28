@@ -1,50 +1,57 @@
 ﻿using System.Collections.Generic;
+using MiniIT.AUDIO;
+using MiniIT.ENUM;
+using MiniIT.LIFECYCLE;
+using MiniIT.UI.MODEL;
 using UniRx;
 using Zenject;
 
-public class EndGameViewModel : BaseUIViewModel
+namespace MiniIT.UI.VIEWMODEL
 {
-    public readonly ReactiveProperty<int> Score = new ReactiveProperty<int>();
-
-    private LevelLoader levelLoader;
-    private GameExit gameExit;
-    private GameFinalizer gameFinalizer;
-    private AudioService audioService;
-
-    [Inject]
-    public void Construct(LevelLoader loader, GameExit exit, GameFinalizer finalizer, AudioService audios)
+    public class EndGameViewModel : BaseUIViewModel
     {
-        levelLoader = loader;
-        gameExit = exit;
-        gameFinalizer = finalizer;
-        audioService = audios;
-    }
+        public readonly ReactiveProperty<int> Score = new ReactiveProperty<int>();
 
-    public void NextLevel()
-    {
-        levelLoader.CompleteLevel();
-        OnActivate.OnNext(false);
-    }
+        private LevelLoader levelLoader;
+        private GameExit gameExit;
+        private GameFinalizer gameFinalizer;
+        private AudioService audioService;
 
-    public void ExitGame() => gameExit.Exit();
-
-    protected override void Subscribe()
-    {
-        EndGameModel endGameModel = (EndGameModel)Model;
-
-        endGameModel.Score.Subscribe(score => Score.Value = score).AddTo(Disposables);
-        gameFinalizer.OnFinish.Subscribe(Activate).AddTo(Disposables);
-    }
-
-    private void Activate(KeyValuePair<EndGameType, int> result)
-    {
-        if (result.Key != EndGameType.Win)
+        [Inject]
+        public void Construct(LevelLoader loader, GameExit exit, GameFinalizer finalizer, AudioService audios)
         {
-            return;
+            levelLoader = loader;
+            gameExit = exit;
+            gameFinalizer = finalizer;
+            audioService = audios;
         }
 
-        Score.Value = result.Value;
-        OnActivate.OnNext(true);
-        audioService.PlaySound(SoundName.GameWin);
+        public void NextLevel()
+        {
+            levelLoader.CompleteLevel();
+            OnActivate.OnNext(false);
+        }
+
+        public void ExitGame() => gameExit.Exit();
+
+        protected override void Subscribe()
+        {
+            EndGameModel endGameModel = (EndGameModel)Model;
+
+            endGameModel.Score.Subscribe(score => Score.Value = score).AddTo(Disposables);
+            gameFinalizer.OnFinish.Subscribe(Activate).AddTo(Disposables);
+        }
+
+        private void Activate(KeyValuePair<EndGameType, int> result)
+        {
+            if (result.Key != EndGameType.Win)
+            {
+                return;
+            }
+
+            Score.Value = result.Value;
+            OnActivate.OnNext(true);
+            audioService.PlaySound(SoundName.GameWin);
+        }
     }
 }

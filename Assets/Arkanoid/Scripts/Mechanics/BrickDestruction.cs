@@ -1,15 +1,28 @@
 using UniRx;
 using UnityEngine;
 
-public class BrickDestruction
+namespace MiniIT.MECHANICS
 {
-    public readonly Subject<Unit> OnBrickDestroyed = new Subject<Unit>();
-
-    public bool Collide(Collision other, bool isUnbreakable)
+    public class BrickDestruction
     {
-        if (isUnbreakable || other.gameObject.layer != LayerMask.NameToLayer("Ball")) return false;
+        public Subject<Unit> OnBrickDestroyed { get; } = new Subject<Unit>();
+        
+        public bool Collide(Collision collision, bool isUnbreakable)
+        {
+            if (collision == null || 
+                collision.gameObject.layer != LayerMask.NameToLayer("Ball"))
+            {
+                return false;
+            }
 
-        OnBrickDestroyed.OnNext(Unit.Default);
-        return true;
+            if (isUnbreakable)
+            {
+                return false;
+            }
+
+            OnBrickDestroyed.OnNext(Unit.Default);
+
+            return true;
+        }
     }
 }

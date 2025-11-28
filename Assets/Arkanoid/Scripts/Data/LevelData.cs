@@ -1,10 +1,14 @@
 ﻿using System;
+using MiniIT.INTERACTABLES.MODEL;
 using UnityEngine;
 
-[Serializable]
-public class LevelData
+namespace MiniIT.DATA
 {
-    [field: SerializeField] public string LevelName { get; private set; } = string.Empty;
-    [field: SerializeField] public string NextLevelName { get; private set; } = string.Empty;
-    [field: SerializeField] public BrickModel[] Bricks { get; private set; } = Array.Empty<BrickModel>();
+    [Serializable]
+    public class LevelData
+    {
+        [field: SerializeField] public string LevelName { get; private set; } = string.Empty;
+        [field: SerializeField] public string NextLevelName { get; private set; } = string.Empty;
+        [field: SerializeField] public BrickModel[] Bricks { get; private set; } = Array.Empty<BrickModel>();
+    }
 }

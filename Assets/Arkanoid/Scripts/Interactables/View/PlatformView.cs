@@ -1,7 +1,12 @@
-﻿public class PlatformView : BaseInteractableView
+﻿using MiniIT.INTERACTABLES.MODEL;
+
+namespace MiniIT.INTERACTABLES.VIEW
 {
-    protected override void Init(IInteractableModel model)
+    public class PlatformView : BaseInteractableView
     {
-        transform.position = model.Position;
+        protected override void Init(IInteractableModel model)
+        {
+            transform.position = model.Position;
+        }
     }
 }

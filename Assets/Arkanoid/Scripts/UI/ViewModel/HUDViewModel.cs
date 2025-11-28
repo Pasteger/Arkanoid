@@ -1,50 +1,56 @@
-﻿using UniRx;
+﻿using MiniIT.LIFECYCLE;
+using MiniIT.MECHANICS;
+using MiniIT.UI.MODEL;
+using UniRx;
 using Zenject;
 
-public class HUDViewModel : BaseUIViewModel
+namespace MiniIT.UI.VIEWMODEL
 {
-    public readonly ReactiveProperty<int> Score = new ReactiveProperty<int>();
-
-    private LevelLoader levelLoader;
-    private BrickDestruction brickDestruction;
-    private PlatformMovement platformMovement;
-
-    [Inject]
-    public void Construct(LevelLoader loader, BrickDestruction bricksDestruction, PlatformMovement movement)
+    public class HUDViewModel : BaseUIViewModel
     {
-        levelLoader = loader;
-        brickDestruction = bricksDestruction;
-        platformMovement = movement;
-    }
+        public readonly ReactiveProperty<int> Score = new ReactiveProperty<int>();
 
-    protected override void Subscribe()
-    {
-        HUDModel hudModel = (HUDModel)Model;
+        private LevelLoader levelLoader;
+        private BrickDestruction brickDestruction;
+        private PlatformMovement platformMovement;
 
-        hudModel.Score.Subscribe(score => Score.Value = score).AddTo(Disposables);
+        [Inject]
+        public void Construct(LevelLoader loader, BrickDestruction bricksDestruction, PlatformMovement movement)
+        {
+            levelLoader = loader;
+            brickDestruction = bricksDestruction;
+            platformMovement = movement;
+        }
 
-        levelLoader.OnLevelLoaded.Subscribe(_ => Init()).AddTo(Disposables);
-        brickDestruction.OnBrickDestroyed.Subscribe(_ => Score.Value++).AddTo(Disposables);
-    }
+        protected override void Subscribe()
+        {
+            HUDModel hudModel = (HUDModel)Model;
 
-    public void MovePlatformRight()
-    {
-        platformMovement.SetAxis(+1);
-    }
+            hudModel.Score.Subscribe(score => Score.Value = score).AddTo(Disposables);
 
-    public void MovePlatformLeft()
-    {
-        platformMovement.SetAxis(-1);
-    }
+            levelLoader.OnLevelLoaded.Subscribe(_ => Init()).AddTo(Disposables);
+            brickDestruction.OnBrickDestroyed.Subscribe(_ => Score.Value++).AddTo(Disposables);
+        }
 
-    public void MovePlatformReset()
-    {
-        platformMovement.SetAxis(0);
-    }
+        public void MovePlatformRight()
+        {
+            platformMovement.SetAxis(+1);
+        }
 
-    private void Init()
-    {
-        Score.Value = 0;
-        OnActivate.OnNext(true);
+        public void MovePlatformLeft()
+        {
+            platformMovement.SetAxis(-1);
+        }
+
+        public void MovePlatformReset()
+        {
+            platformMovement.SetAxis(0);
+        }
+
+        private void Init()
+        {
+            Score.Value = 0;
+            OnActivate.OnNext(true);
+        }
     }
 }

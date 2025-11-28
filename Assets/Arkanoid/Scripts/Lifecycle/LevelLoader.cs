@@ -1,63 +1,77 @@
 using Cysharp.Threading.Tasks;
+using MiniIT.DATA;
+using MiniIT.DESCRIPTORS;
+using MiniIT.FACTORIES;
 using UniRx;
 using UnityEngine;
 using Zenject;
 
-public class LevelLoader
+namespace MiniIT.LIFECYCLE
 {
-    public Subject<Unit> OnLevelLoaded = new Subject<Unit>();
-
-    private readonly LevelsDescriptor levelsDescriptor;
-    private readonly PrefabKeyFactory prefabKeyFactory;
-    private readonly InteractablesLoader interactablesLoader;
-
-    private LevelData currentLevelData = null!;
-    private Transform border = null!;
-
-    [Inject]
-    public LevelLoader(
-        LevelsDescriptor descriptor,
-        PrefabKeyFactory keyFactory,
-        InteractablesLoader loaderInteractables)
+    public class LevelLoader
     {
-        levelsDescriptor = descriptor;
-        prefabKeyFactory = keyFactory;
-        interactablesLoader = loaderInteractables;
-    }
+        public Subject<Unit> OnLevelLoaded { get; } = new Subject<Unit>();
 
-    public async UniTask LoadLevel()
-    {
-        string levelName = PlayerPrefs.GetString("CurrentLevel", string.Empty);
-        currentLevelData = levelsDescriptor.GetLevel(levelName);
+        private readonly LevelsDescriptor      levelsDescriptor     = null;
+        private readonly PrefabKeyFactory      prefabKeyFactory     = null;
+        private readonly InteractablesLoader   interactablesLoader  = null;
 
-        if (border == null)
+        private LevelData currentLevelData = null;
+        private Transform border           = null;
+
+        [Inject]
+        public LevelLoader(
+            LevelsDescriptor levelsDescriptor,
+            PrefabKeyFactory prefabKeyFactory,
+            InteractablesLoader interactablesLoader)
         {
-            border = await prefabKeyFactory.Create<Transform>(levelsDescriptor.BorderPrefabKey);
+            this.levelsDescriptor    = levelsDescriptor;
+            this.prefabKeyFactory    = prefabKeyFactory;
+            this.interactablesLoader = interactablesLoader;
         }
 
-        border.gameObject.SetActive(true);
+        public async UniTask LoadLevelAsync()
+        {
+            string levelName = PlayerPrefs.GetString("CurrentLevel", string.Empty);
+            currentLevelData = levelsDescriptor.GetLevel(levelName);
 
-        await interactablesLoader.Load(currentLevelData);
+            await EnsureBorderCreatedAsync();
 
-        OnLevelLoaded.OnNext(Unit.Default);
-    }
+            border.gameObject.SetActive(true);
 
-    public void CompleteLevel()
-    {
-        PlayerPrefs.SetString("CurrentLevel", currentLevelData.NextLevelName);
-        ReloadLevel();
-    }
+            await interactablesLoader.LoadAsync(currentLevelData);
 
-    public void ReloadLevel()
-    {
-        UnloadLevel();
-        LoadLevel().Forget();
-    }
+            OnLevelLoaded.OnNext(Unit.Default);
+        }
 
-    private void UnloadLevel()
-    {
-        border.gameObject.SetActive(false);
+        public void CompleteLevel()
+        {
+            PlayerPrefs.SetString("CurrentLevel", currentLevelData.NextLevelName);
+            ReloadLevel();
+        }
 
-        interactablesLoader.Unload();
+        public void ReloadLevel()
+        {
+            UnloadLevel();
+            LoadLevelAsync().Forget();
+        }
+        
+        private void UnloadLevel()
+        {
+            if (border != null)
+            {
+                border.gameObject.SetActive(false);
+            }
+
+            interactablesLoader.Unload();
+        }
+        
+        private async UniTask EnsureBorderCreatedAsync()
+        {
+            if (border == null)
+            {
+                border = await prefabKeyFactory.Create<Transform>(levelsDescriptor.BorderPrefabKey);
+            }
+        }
     }
 }

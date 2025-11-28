@@ -1,5 +1,8 @@
-﻿public enum EndGameType
+﻿namespace MiniIT.ENUM
 {
-    Win = 0,
-    Over = 1,
+    public enum EndGameType
+    {
+        Win = 0,
+        Over = 1,
+    }
 }

@@ -3,60 +3,100 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-public class PlatformMovement : IInitializable, IDisposable
+namespace MiniIT.MECHANICS
 {
-    private bool isBlockingRight;
-    private bool isBlockingLeft;
-    private PlatformControls platformControls;
-    private float axis;
-
-    public void Initialize()
+    public class PlatformMovement : IInitializable, IDisposable
     {
-        platformControls = new PlatformControls();
-        platformControls.Enable();
-        platformControls.Actions.Movement.started += SetAxis;
-        platformControls.Actions.Movement.canceled += ResetAxis;
-    }
+        private bool isBlockingLeft  = false;
+        private bool isBlockingRight = false;
 
-    public void SetAxis(float value) => axis = value;
+        private PlatformControls platformControls = null;
+        private float            movementAxis     = 0f;
 
-    public void Move(Rigidbody rigidbody, float moveSpeed)
-    {
-        if (axis > 0 && isBlockingRight || axis < 0 && isBlockingLeft) return;
-
-        if (axis < 0)
+        public void Initialize()
         {
-            isBlockingRight = false;
+            platformControls = new PlatformControls();
+            platformControls.Enable();
+
+            platformControls.Actions.Movement.started  += OnMovementStarted;
+            platformControls.Actions.Movement.canceled += OnMovementCanceled;
         }
 
-        if (axis > 0)
+        public void SetAxis(float value) => movementAxis = value;
+        
+        public void Move(Rigidbody rigidbody, float moveSpeed)
         {
-            isBlockingLeft = false;
+            if (rigidbody == null)
+            {
+                return;
+            }
+
+            if ((movementAxis > 0f && isBlockingRight) || 
+                (movementAxis < 0f && isBlockingLeft))
+            {
+                movementAxis = 0f;
+            }
+
+            Vector3 velocity = rigidbody.velocity;
+            velocity.x = movementAxis * moveSpeed;
+
+            rigidbody.velocity = velocity;
+        }
+        
+        public void Collide(Collision collision)
+        {
+            if (collision == null || collision.contacts.Length == 0)
+            {
+                return;
+            }
+
+            float normalX = collision.contacts[0].normal.x;
+
+            if (normalX > 0.9f)
+            {
+                isBlockingLeft  = true;
+            }
+            else if (normalX < -0.9f)
+            {
+                isBlockingRight = true;
+            }
         }
 
-        rigidbody.velocity = new Vector3(axis * moveSpeed, rigidbody.velocity.y, rigidbody.velocity.z);
-    }
-
-    public void Collide(Collision other)
-    {
-        if (other.contacts[0].normal.x < 0)
+        public void ReleaseBlock()
         {
-            isBlockingRight = true;
+            if (movementAxis < 0f)
+            {
+                isBlockingRight = false;
+            }
+            else if (movementAxis > 0f)
+            {
+                isBlockingLeft = false;
+            }
         }
-        else if (other.contacts[0].normal.x > 0)
+
+        private void OnMovementStarted(InputAction.CallbackContext context)
         {
-            isBlockingLeft = true;
+            movementAxis = context.ReadValue<float>();
+            ReleaseBlock();
         }
-    }
 
-    private void SetAxis(InputAction.CallbackContext context) => SetAxis(context.ReadValue<float>());
-    private void ResetAxis(InputAction.CallbackContext _) => SetAxis(0);
+        private void OnMovementCanceled(InputAction.CallbackContext _)
+        {
+            movementAxis = 0f;
+        }
+        
+        public void Dispose()
+        {
+            if (platformControls != null)
+            {
+                platformControls.Actions.Movement.started  -= OnMovementStarted;
+                platformControls.Actions.Movement.canceled -= OnMovementCanceled;
 
-    public void Dispose()
-    {
-        platformControls.Actions.Movement.started -= SetAxis;
-        platformControls.Actions.Movement.canceled -= ResetAxis;
-        platformControls.Disable();
-        platformControls.Dispose();
+                platformControls.Disable();
+                platformControls.Dispose();
+
+                platformControls = null;
+            }
+        }
     }
 }

@@ -1,29 +1,35 @@
-﻿using UniRx;
+﻿using MiniIT.INTERACTABLES.MODEL;
+using MiniIT.LIFECYCLE;
+using MiniIT.MECHANICS;
+using UniRx;
 using UnityEngine;
 using Zenject;
 
-public class PlatformViewModel : BaseInteractableViewModel
+namespace MiniIT.INTERACTABLES.VIEWMODEL
 {
-    private PlatformMovement platformMovement;
-    private GameFinalizer gameFinalizer;
-
-    private PlatformModel platformModel => (PlatformModel)Model;
-
-    [Inject]
-    public void Construct(PlatformMovement movement, GameFinalizer finalizer)
+    public class PlatformViewModel : BaseInteractableViewModel
     {
-        platformMovement = movement;
-        gameFinalizer = finalizer;
+        private PlatformMovement platformMovement;
+        private GameFinalizer gameFinalizer;
 
-        gameFinalizer.OnFinish.Subscribe(_ => OnActivate.OnNext(false)).AddTo(Disposables);
-    }
+        private PlatformModel platformModel => (PlatformModel)Model;
 
-    public override void Update(Rigidbody rigidbody) => platformMovement.Move(rigidbody, platformModel.MoveSpeed.Value);
+        [Inject]
+        public void Construct(PlatformMovement movement, GameFinalizer finalizer)
+        {
+            platformMovement = movement;
+            gameFinalizer = finalizer;
 
-    public override void Collide(Collision other)
-    {
-        if ((platformModel.BallLayer & (1 << other.gameObject.layer)) != 0) return; 
+            gameFinalizer.OnFinish.Subscribe(_ => OnActivate.OnNext(false)).AddTo(Disposables);
+        }
+
+        public override void Update(Rigidbody rigidbody) => platformMovement.Move(rigidbody, platformModel.MoveSpeed.Value);
+
+        public override void Collide(Collision other)
+        {
+            if ((platformModel.BallLayer & (1 << other.gameObject.layer)) != 0) return; 
         
-        platformMovement.Collide(other);
+            platformMovement.Collide(other);
+        }
     }
 }

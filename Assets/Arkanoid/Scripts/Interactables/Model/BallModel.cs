@@ -2,25 +2,28 @@
 using UniRx;
 using UnityEngine;
 
-[Serializable]
-public class BallModel : InteractableModel
+namespace MiniIT.INTERACTABLES.MODEL
 {
-    [field: SerializeField]
-    public ReactiveProperty<float> MoveSpeed { get; private set; } = new ReactiveProperty<float>();
-
-    [field: SerializeField]
-    public ReactiveProperty<Vector3> Direction { get; private set; } = new ReactiveProperty<Vector3>();
-
-    [field: SerializeField] public LayerMask DeathTriggerLayer { get; set; } = 0;
-
-    public BallModel()
+    [Serializable]
+    public class BallModel : InteractableModel
     {
-    }
+        [field: SerializeField]
+        public ReactiveProperty<float> MoveSpeed { get; private set; } = new ReactiveProperty<float>();
 
-    public BallModel(BallModel referenceModel) : base(referenceModel)
-    {
-        MoveSpeed.Value = referenceModel.MoveSpeed.Value;
-        Direction.Value = referenceModel.Direction.Value;
-        DeathTriggerLayer = referenceModel.DeathTriggerLayer;
+        [field: SerializeField]
+        public ReactiveProperty<Vector3> Direction { get; private set; } = new ReactiveProperty<Vector3>();
+
+        [field: SerializeField] public LayerMask DeathTriggerLayer { get; set; } = 0;
+
+        public BallModel()
+        {
+        }
+
+        public BallModel(BallModel referenceModel) : base(referenceModel)
+        {
+            MoveSpeed.Value = referenceModel.MoveSpeed.Value;
+            Direction.Value = referenceModel.Direction.Value;
+            DeathTriggerLayer = referenceModel.DeathTriggerLayer;
+        }
     }
 }

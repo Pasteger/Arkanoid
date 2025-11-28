@@ -1,38 +1,43 @@
-﻿using TMPro;
+﻿using MiniIT.UI.MODEL;
+using MiniIT.UI.VIEWMODEL;
+using TMPro;
 using UniRx;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class HUDView : BaseUIView, IPointerDownHandler, IPointerUpHandler
+namespace MiniIT.UI.VIEW
 {
-    [SerializeField] private TMP_Text scoreText;
-    [SerializeField] private TMP_Text scoreLabelText;
-
-    protected override void Init(IUIModel uiModel)
+    public class HUDView : BaseUIView, IPointerDownHandler, IPointerUpHandler
     {
-        HUDModel model = (HUDModel)uiModel;
-        HUDViewModel viewModel = (HUDViewModel)ViewModel;
+        [SerializeField] private TMP_Text scoreText;
+        [SerializeField] private TMP_Text scoreLabelText;
 
-        scoreLabelText.text = model.ScoreLabelText;
-        viewModel.Score.Subscribe(score => scoreText.text = score.ToString()).AddTo(Disposables);
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        HUDViewModel viewModel = (HUDViewModel)ViewModel;
-        if (eventData.position.x > Screen.width / 2)
+        protected override void Init(IUIModel uiModel)
         {
-            viewModel.MovePlatformRight();
-        }
-        else
-        {
-            viewModel.MovePlatformLeft();
-        }
-    }
+            HUDModel model = (HUDModel)uiModel;
+            HUDViewModel viewModel = (HUDViewModel)ViewModel;
 
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        HUDViewModel viewModel = (HUDViewModel)ViewModel;
-        viewModel.MovePlatformReset();
+            scoreLabelText.text = model.ScoreLabelText;
+            viewModel.Score.Subscribe(score => scoreText.text = score.ToString()).AddTo(Disposables);
+        }
+
+        public void OnPointerDown(PointerEventData eventData)
+        {
+            HUDViewModel viewModel = (HUDViewModel)ViewModel;
+            if (eventData.position.x > Screen.width / 2)
+            {
+                viewModel.MovePlatformRight();
+            }
+            else
+            {
+                viewModel.MovePlatformLeft();
+            }
+        }
+
+        public void OnPointerUp(PointerEventData eventData)
+        {
+            HUDViewModel viewModel = (HUDViewModel)ViewModel;
+            viewModel.MovePlatformReset();
+        }
     }
 }

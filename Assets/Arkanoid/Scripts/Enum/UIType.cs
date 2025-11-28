@@ -1,7 +1,10 @@
-﻿public enum UIType
+﻿namespace MiniIT.ENUM
 {
-    MainMenu = 0,
-    HUD = 1,
-    EndGameWindow = 2,
-    GameOverWindow = 3,
+    public enum UIType
+    {
+        MainMenu = 0,
+        HUD = 1,
+        EndGameWindow = 2,
+        GameOverWindow = 3,
+    }
 }

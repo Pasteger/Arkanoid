@@ -1,9 +1,14 @@
-﻿using UnityEngine;
+﻿using MiniIT.UI.MODEL;
+using MiniIT.UI.VIEWMODEL;
+using UnityEngine;
 
-public abstract class BaseUIDescriptor : ScriptableObject
+namespace MiniIT.DESCRIPTORS.UI
 {
-    [field: SerializeField] public string PrefabKey { get; private set; }
+    public abstract class BaseUIDescriptor : ScriptableObject
+    {
+        [field: SerializeField] public string PrefabKey { get; private set; }
 
-    public abstract IUIViewModel ViewModel { get; }
-    public abstract IUIModel Model { get; }
+        public abstract IUIViewModel ViewModel { get; }
+        public abstract IUIModel Model { get; }
+    }
 }

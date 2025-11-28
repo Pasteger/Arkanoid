@@ -1,10 +1,15 @@
+using MiniIT.INTERACTABLES.MODEL;
+using MiniIT.INTERACTABLES.VIEWMODEL;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Brick Descriptor", menuName = "Interactables Descriptors/Brick Descriptor")]
-public class BrickDescriptor : BaseInteractableDescriptor
+namespace MiniIT.DESCRIPTORS.INTERACTABLES
 {
-    [field: SerializeField] public BrickModel BrickModel { get; private set; }
+    [CreateAssetMenu(fileName = "Brick Descriptor", menuName = "Interactables Descriptors/Brick Descriptor")]
+    public class BrickDescriptor : BaseInteractableDescriptor
+    {
+        [field: SerializeField] public BrickModel BrickModel { get; private set; }
 
-    public override IInteractableViewModel ViewModel => new BrickViewModel();
-    public override IInteractableModel Model => new BrickModel(BrickModel);
+        public override IInteractableViewModel ViewModel => new BrickViewModel();
+        public override IInteractableModel Model => new BrickModel(BrickModel);
+    }
 }

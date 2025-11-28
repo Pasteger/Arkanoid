@@ -1,10 +1,14 @@
 ﻿using System;
+using MiniIT.UI.VIEWMODEL;
 using UnityEngine;
 
-public interface IUIView : IDisposable
+namespace MiniIT.UI.VIEW
 {
-    public IUIViewModel ViewModel { get; }
-    public void SetViewModel(IUIViewModel viewModel);
-    public void Activate(bool isActive);
-    public void SetParent(Transform parent);
+    public interface IUIView : IDisposable
+    {
+        public IUIViewModel ViewModel { get; }
+        public void SetViewModel(IUIViewModel viewModel);
+        public void Activate(bool isActive);
+        public void SetParent(Transform parent);
+    }
 }

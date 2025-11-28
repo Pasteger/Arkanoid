@@ -1,9 +1,14 @@
-﻿using UnityEngine;
+﻿using MiniIT.DESCRIPTORS.INTERACTABLES;
+using MiniIT.ENUM;
+using UnityEngine;
 
-[CreateAssetMenu(fileName = "Interactables Descriptor", menuName = "Game Descriptors/Interactables Descriptor")]
-public class InteractablesDescriptor : ScriptableObject
+namespace MiniIT.DESCRIPTORS
 {
-    [SerializeField] private SerializableDictionary<InteractableType, BaseInteractableDescriptor> descriptors;
+    [CreateAssetMenu(fileName = "Interactables Descriptor", menuName = "Game Descriptors/Interactables Descriptor")]
+    public class InteractablesDescriptor : ScriptableObject
+    {
+        [SerializeField] private SerializableDictionary<InteractableType, BaseInteractableDescriptor> descriptors;
 
-    public BaseInteractableDescriptor GetDescriptor(InteractableType type) => descriptors.GetValue(type);
+        public BaseInteractableDescriptor GetDescriptor(InteractableType type) => descriptors.GetValue(type);
+    }
 }

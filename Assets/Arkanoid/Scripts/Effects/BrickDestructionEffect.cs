@@ -1,15 +1,23 @@
-using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-public class BrickDestructionEffect : MonoBehaviour
+namespace MiniIT.EFFECTS
 {
-    private IEnumerator Start()
+    public class BrickDestructionEffect : MonoBehaviour
     {
-        ParticleSystem particlesSystem = GetComponent<ParticleSystem>();
-        particlesSystem.Play();
+        private void Start()
+        {
+            PlayAndDestroyAsync().Forget();
+        }
+        
+        private async UniTaskVoid PlayAndDestroyAsync()
+        {
+            ParticleSystem particlesSystem = GetComponent<ParticleSystem>();
+            particlesSystem.Play();
 
-        yield return new WaitWhile(() => particlesSystem.isPlaying);
+            await UniTask.WaitWhile(() => particlesSystem.isPlaying);
 
-        Destroy(gameObject);
+            Destroy(gameObject);
+        }
     }
 }

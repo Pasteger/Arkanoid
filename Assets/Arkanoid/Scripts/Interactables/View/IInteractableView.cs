@@ -1,9 +1,13 @@
 ﻿using System;
+using MiniIT.INTERACTABLES.VIEWMODEL;
 using UnityEngine;
 
-public interface IInteractableView : IDisposable
+namespace MiniIT.INTERACTABLES.VIEW
 {
-    public IInteractableViewModel ViewModel { get; }
-    public void SetViewModel(IInteractableViewModel viewModel);
-    public void Activate(bool isActive, Vector3 position = new Vector3());
+    public interface IInteractableView : IDisposable
+    {
+        public IInteractableViewModel ViewModel { get; }
+        public void SetViewModel(IInteractableViewModel viewModel);
+        public void Activate(bool isActive, Vector3 position = new Vector3());
+    }
 }

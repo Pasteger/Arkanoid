@@ -1,30 +1,35 @@
-﻿using TMPro;
+﻿using MiniIT.UI.MODEL;
+using MiniIT.UI.VIEWMODEL;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class MainMenuView : BaseUIView
+namespace MiniIT.UI.VIEW
 {
-    [SerializeField] private Button playButton;
-    [SerializeField] private Button exitButton;
-    [SerializeField] private TMP_Text playButtonText;
-    [SerializeField] private TMP_Text exitButtonText;
-
-    protected override void Init(IUIModel uiModel)
+    public class MainMenuView : BaseUIView
     {
-        MainMenuModel model = (MainMenuModel)uiModel;
-        MainMenuViewModel viewModel = (MainMenuViewModel)ViewModel;
+        [SerializeField] private Button playButton;
+        [SerializeField] private Button exitButton;
+        [SerializeField] private TMP_Text playButtonText;
+        [SerializeField] private TMP_Text exitButtonText;
 
-        playButtonText.text = model.PlayButtonText;
-        exitButtonText.text = model.ExitButtonText;
+        protected override void Init(IUIModel uiModel)
+        {
+            MainMenuModel model = (MainMenuModel)uiModel;
+            MainMenuViewModel viewModel = (MainMenuViewModel)ViewModel;
 
-        playButton.onClick.AddListener(() => viewModel.PlayGame());
-        exitButton.onClick.AddListener(() => viewModel.ExitGame());
-    }
+            playButtonText.text = model.PlayButtonText;
+            exitButtonText.text = model.ExitButtonText;
 
-    public override void Dispose()
-    {
-        base.Dispose();
-        playButton.onClick.RemoveAllListeners();
-        exitButton.onClick.RemoveAllListeners();
+            playButton.onClick.AddListener(() => viewModel.PlayGame());
+            exitButton.onClick.AddListener(() => viewModel.ExitGame());
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
+            playButton.onClick.RemoveAllListeners();
+            exitButton.onClick.RemoveAllListeners();
+        }
     }
 }
