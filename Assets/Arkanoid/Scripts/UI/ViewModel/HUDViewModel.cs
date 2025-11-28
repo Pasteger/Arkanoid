@@ -1,5 +1,4 @@
 ﻿using UniRx;
-using UnityEngine;
 using Zenject;
 
 public class HUDViewModel : BaseUIViewModel
@@ -8,12 +7,14 @@ public class HUDViewModel : BaseUIViewModel
 
     private LevelLoader levelLoader;
     private BrickDestruction brickDestruction;
+    private PlatformMovement platformMovement;
 
     [Inject]
-    public void Construct(LevelLoader loader, BrickDestruction bricksDestruction)
+    public void Construct(LevelLoader loader, BrickDestruction bricksDestruction, PlatformMovement movement)
     {
         levelLoader = loader;
         brickDestruction = bricksDestruction;
+        platformMovement = movement;
     }
 
     protected override void Subscribe()
@@ -21,9 +22,24 @@ public class HUDViewModel : BaseUIViewModel
         HUDModel hudModel = (HUDModel)Model;
 
         hudModel.Score.Subscribe(score => Score.Value = score).AddTo(Disposables);
-        
+
         levelLoader.OnLevelLoaded.Subscribe(_ => Init()).AddTo(Disposables);
         brickDestruction.OnBrickDestroyed.Subscribe(_ => Score.Value++).AddTo(Disposables);
+    }
+
+    public void MovePlatformRight()
+    {
+        platformMovement.SetAxis(+1);
+    }
+
+    public void MovePlatformLeft()
+    {
+        platformMovement.SetAxis(-1);
+    }
+
+    public void MovePlatformReset()
+    {
+        platformMovement.SetAxis(0);
     }
 
     private void Init()
